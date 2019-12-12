@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref=""></ion-back-button>
+        </ion-buttons>
+    <ion-title>players</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <ion-list>
+        <ion-item button [routerLink]="['/players', player.id]" *ngFor="let player of players">
+          <ion-badge slot="start">{{ player.points }}</ion-badge> {{ player.name }}
+        </ion-item>
+      </ion-list>
+</ion-content>

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/matches"></ion-back-button>
+        </ion-buttons>
+    <ion-title>match-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-text-center" *ngIf="match">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="7" size-sm="6" size-md="5" size-lg="4">
+                    <ion-card>
+                      <ion-card-content>
+                  <ion-item>
+                      <ion-label position="stacked">date:</ion-label>
+                      {{ match.date }}
+                    </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="10" size-sm="9" size-md="4">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-label position="stacked">home</ion-label>
+                      <ion-item class="ion-activatable">
+                        <ion-label position="stacked">host:</ion-label>
+                        {{ match.host }}
+                      </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col size="5" offset="4" size-md="4" offset-md="0" size-lg="4">
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-label position="stacked">score</ion-label>
+                      <ion-row>
+                        <ion-col class="ion-no-padding">
+                          <ion-item class="ion-activatable">
+                            <ion-label position="stacked">home</ion-label>
+                            {{ match.hostScore }}
+                          </ion-item>
+                        </ion-col>
+                        :
+                        <ion-col class="ion-no-padding">
+                          <ion-item class="ion-activatable">
+                            <ion-label position="stacked">away</ion-label>
+                            {{ match.guestScore }}
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col size="10" offset="2" size-sm="9" offset-sm="3" size-md="4" offset-md="0" size-lg="4">
+                  <ion-card>
+                    <ion-card-content>
+                        <ion-label position="stacked">away</ion-label>
+                      <ion-item class="ion-activatable">
+                        <ion-label position="stacked">guest:</ion-label>
+                        {{ match.guest }}
+                      </ion-item>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-buttons>
+                  <ion-button fill="solid"><ion-icon name="color-wand"></ion-icon>magia</ion-button>
+                  <ion-button fill="outline" color="danger">
+                      <ion-icon name="close"></ion-icon>
+                  clear
+                </ion-button>
+                </ion-buttons>
+              </ion-row>
+            </ion-grid>
+
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+                <ion-fab-button routerLink="/match-report">
+                  <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+
+</ion-content>

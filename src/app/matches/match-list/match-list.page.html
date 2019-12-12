@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>matches</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header class="ion-text-center">
+      <ion-col size="2">
+        days
+      </ion-col>
+      <ion-col size="3">
+        host
+      </ion-col>
+      <ion-col size="2">
+        result
+      </ion-col>
+      <ion-col size="3">
+        guest
+      </ion-col>
+      <ion-col size="2">
+        status
+      </ion-col>
+    </ion-list-header>
+    <ion-item button *ngFor="let match of matches" class="ion-no-padding" [routerLink]="['/matches', match.id]">
+      <!-- ten grid ma ten głupi padding .item-inner:padding-right -->
+      <ion-grid>
+        <ion-chip>{{ match.date }}</ion-chip>
+        <ion-chip>{{ match.type }}</ion-chip>
+        <ion-row>
+          <ion-col size="2">
+            <ion-badge>{{ match.daysAgo }} days ago</ion-badge>
+          </ion-col>
+          <ion-col size="3">
+            <ion-card color="dark">
+              <ion-card-header
+                class="ion-color"
+                [ngClass]="match.hostScore > match.guestScore ? 'ion-color-success' : match.hostScore == match.guestScore ? 'ion-color-warning' : 'ion-color-danger'"
+              >
+                {{ match.hostName }}
+              </ion-card-header>
+              <ion-card-content>{{ match.hostClub }}</ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="2" class="ion-text-center">
+            {{ match.hostScore }} : {{ match.guestScore }}
+          </ion-col>
+          <ion-col size="3">
+            <ion-card color="dark">
+              <ion-card-header
+                class="ion-color"
+                [ngClass]="match.guestScore > match.hostScore ? 'ion-color-success' : match.guestScore == match.hostScore ? 'ion-color-warning' : 'ion-color-danger'"
+              >
+                {{ match.guestName }}
+              </ion-card-header>
+              <ion-card-content>
+                {{ match.guestClub }}
+                <ion-icon name="football"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="2">
+            <ion-fab>
+              <ion-fab-button>{{ match.status }}</ion-fab-button>
+              <ion-fab-list side="top">
+                <ion-fab-button>accept</ion-fab-button>
+              </ion-fab-list>
+              <ion-fab-list side="start">
+                <ion-fab-button>decline</ion-fab-button>
+              </ion-fab-list>
+              <ion-fab-list side="bottom">
+                <ion-fab-button>edit</ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- zmusić tego div'a do zejścia ponieżej grid'a i zajęcia 100% szerokości -->
+      <!-- <div
+        [ngClass]="match.hostScore > match.guestScore ? 'host-win' : match.hostScore == match.guestScore ? 'draw' : 'guest-win'"
+      >
+        x
+      </div> -->
+    </ion-item>
+
+    <!-- skeleton text start -->
+    <ng-container *ngIf="!matches">
+      <ion-item *ngFor="let iteration of [1,2,3]" class="ion-no-padding">
+        <ion-grid>
+          <ion-chip style="width: 10em"><ion-skeleton-text animated></ion-skeleton-text></ion-chip>
+          <ion-chip style="width: 5em"><ion-skeleton-text animated></ion-skeleton-text></ion-chip>
+          <ion-row>
+            <ion-col size="2">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-card>
+                <ion-card-header>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="2">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-card>
+                <ion-card-header>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="2">
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+    <!-- skeleton text end -->
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/match-report">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

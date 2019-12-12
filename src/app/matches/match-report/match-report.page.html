@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>match-report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-content class="ion-padding"> -->
+  <form [formGroup]="matchReport" (ngSubmit)="onSubmit(matchReport.value)">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="7" size-sm="6" size-md="5" size-lg="4">
+          <ion-card>
+            <ion-card-content>
+              <ion-label position="stacked">date</ion-label>
+              <ion-item>
+                <ion-datetime
+                  formControlName="date"
+                  type="timestamp"
+                  displayFormat="DDDD D MMM YYYY"
+                  min="2019-01-01"
+                  max="2020-12-31"
+                  required
+                  autofocus
+                ></ion-datetime>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.date">
+                <ng-container
+                  *ngIf="matchReport.get('date').hasError(validation.type) && matchReport.get('date').touched; else elseBlock"
+                  >{{validation.message}}</ng-container
+                >
+                <ng-template #elseBlock>&nbsp;</ng-template>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="5" size-sm="4" size-md="3">
+          <ion-card>
+            <ion-card-content>
+              <ion-item>
+                <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
+                <ion-label position="stacked">type</ion-label>
+                <ion-select formControlName="type" multiple="false" (ionChange)="codeSelected()" required>
+                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}"
+                    >{{ type.value }}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.type">
+                <ng-container
+                  *ngIf="matchReport.get('type').hasError(validation.type) && matchReport.get('type').touched; else elseBlock"
+                  >{{validation.message}}</ng-container
+                >
+                <ng-template #elseBlock>&nbsp;</ng-template>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" size-sm="9" size-md="4">
+          <ion-card>
+            <ion-card-content>
+              <ion-label position="stacked">home</ion-label>
+              <ion-item class="ion-activatable">
+                <ion-label position="stacked">name</ion-label>
+                <ion-input formControlName="hostName" type="text" required></ion-input>
+                <ion-label position="stacked">club</ion-label>
+                <ion-input formControlName="hostClub" type="text" required></ion-input>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.hostName">
+                <ng-container
+                  *ngIf="matchReport.get('hostName').hasError(validation.type) && (matchReport.get('hostName').dirty || matchReport.get('hostName').touched); else elseBlock"
+                  >{{validation.message}}</ng-container
+                >
+                <ng-template #elseBlock>&nbsp;</ng-template>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" offset="3" size-md="4" offset-md="0" size-lg="4">
+          <ion-card>
+            <ion-card-content>
+              <ion-label position="stacked">score</ion-label>
+              <ion-row>
+                <ion-col class="ion-no-padding">
+                  <ion-item class="ion-activatable">
+                    <ion-label position="stacked">home</ion-label>
+                    <ion-input
+                      class="ion-text-center"
+                      formControlName="hostScore"
+                      type="number"
+                      inputmode="numeric"
+                      min="0"
+                      pattern="[0-9]{1,2}"
+                      required
+                    ></ion-input>
+                  </ion-item>
+                </ion-col>
+                :
+                <ion-col class="ion-no-padding">
+                  <ion-item class="ion-activatable">
+                    <ion-label position="stacked">away</ion-label>
+                    <ion-input
+                      class="ion-text-center"
+                      formControlName="guestScore"
+                      type="number"
+                      inputmode="numeric"
+                      min="0"
+                      pattern="[0-9]{1,2}"
+                      required
+                    ></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ng-container *ngFor="let validation of validation_messages.score">
+                <ng-container
+                  *ngIf="matchReport.get('hostScore').hasError(validation.type) && (matchReport.get('hostScore').dirty || matchReport.get('hostScore').touched) || matchReport.get('guestScore').hasError(validation.type) && (matchReport.get('guestScore').dirty || matchReport.get('guestScore').touched); else elseBlock"
+                  >{{validation.message}}</ng-container
+                >
+                <ng-template #elseBlock>&nbsp;</ng-template>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="10" offset="2" size-sm="9" offset-sm="3" size-md="4" offset-md="0" size-lg="4">
+          <ion-card>
+            <ion-card-content>
+              <ion-label position="stacked">away</ion-label>
+              <ion-item class="ion-activatable">
+                <ion-label position="stacked">name</ion-label>
+                <ion-input formControlName="guestName" type="text" required></ion-input>
+                <ion-label position="stacked">club</ion-label>
+                <ion-input formControlName="guestClub" type="text" required></ion-input>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.guestName">
+                <ng-container
+                  *ngIf="matchReport.get('guestName').hasError(validation.type) && (matchReport.get('guestName').dirty || matchReport.get('guestName').touched); else elseBlock"
+                  >{{validation.message}}</ng-container
+                >
+                <ng-template #elseBlock>&nbsp;</ng-template>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-buttons>
+          <ion-button fill="solid"><ion-icon name="color-wand"></ion-icon>magia</ion-button>
+          <ion-button fill="outline" color="danger" (click)="resetFields()">
+            <ion-icon name="close"></ion-icon>
+            clear
+          </ion-button>
+          <ion-button type="submit" [disabled]="!matchReport.valid" fill="solid" color="primary">report</ion-button>
+        </ion-buttons>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
