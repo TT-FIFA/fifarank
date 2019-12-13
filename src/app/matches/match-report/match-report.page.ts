@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { Type } from '../match.model';
+import { Player } from '../../players/player.model';
+import { Club } from '../../club.model';
 
 @Component({
   selector: 'app-match-report',
@@ -10,7 +12,10 @@ import { Type } from '../match.model';
   styleUrls: ['./match-report.page.scss']
 })
 export class MatchReportPage implements OnInit {
+  pageTitle = 'match report';
   types = Type;
+  players: Player[];
+  clubs: Club[];
   matchReport: FormGroup;
 
   validation_messages = {
@@ -30,6 +35,24 @@ export class MatchReportPage implements OnInit {
 
   ngOnInit() {
     this.createForm();
+
+    this.dbService.getPlayers().subscribe(data => {
+      this.players = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Player;
+      });
+    });
+
+    this.dbService.getClubs().subscribe(data => {
+      this.clubs = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Club;
+      });
+    });
   }
 
   createForm() {

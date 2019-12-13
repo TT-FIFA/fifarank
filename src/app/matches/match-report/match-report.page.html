@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>match-report</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header pageTitle="{{ pageTitle }}"></app-header>
 
 <ion-content>
   <!-- <ion-content class="ion-padding"> -->
@@ -43,7 +36,7 @@
               <ion-item>
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
-                <ion-select formControlName="type" multiple="false" (ionChange)="codeSelected()" required>
+                <ion-select formControlName="type" multiple="false" required>
                   <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}"
                     >{{ type.value }}</ion-select-option
                   >
@@ -65,11 +58,20 @@
           <ion-card>
             <ion-card-content>
               <ion-label position="stacked">home</ion-label>
-              <ion-item class="ion-activatable">
+              <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-input formControlName="hostName" type="text" required></ion-input>
+                <ion-select formControlName="hostName" multiple="false" required>
+                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
+                    >{{ player.name }}</ion-select-option
+                  >
+                </ion-select></ion-item
+              ><ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-input formControlName="hostClub" type="text" required></ion-input>
+                <ion-select formControlName="hostClub" multiple="false" required>
+                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
+                    >{{ club.name }}</ion-select-option
+                  >
+                </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.hostName">
                 <ng-container
@@ -130,11 +132,20 @@
           <ion-card>
             <ion-card-content>
               <ion-label position="stacked">away</ion-label>
-              <ion-item class="ion-activatable">
+              <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-input formControlName="guestName" type="text" required></ion-input>
+                <ion-select formControlName="guestName" multiple="false" required>
+                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
+                    >{{ player.name }}</ion-select-option
+                  >
+                </ion-select> </ion-item
+              ><ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-input formControlName="guestClub" type="text" required></ion-input>
+                <ion-select formControlName="guestClub" multiple="false" required>
+                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
+                    >{{ club.name }}</ion-select-option
+                  >
+                </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.guestName">
                 <ng-container

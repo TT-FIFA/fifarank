@@ -24,9 +24,9 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),

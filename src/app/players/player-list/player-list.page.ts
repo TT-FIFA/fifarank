@@ -8,6 +8,7 @@ import { DbService } from 'src/app/services/db.service';
   styleUrls: ['./player-list.page.scss']
 })
 export class PlayerListPage implements OnInit {
+  pageTitle = 'players';
   players: Player[];
 
   constructor(private dbService: DbService) {}

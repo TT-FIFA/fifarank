@@ -2,21 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Match } from '../match.model';
 import { DbService } from 'src/app/services/db.service';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-match-details',
   templateUrl: './match-details.page.html',
-  styleUrls: ['./match-details.page.scss'],
+  styleUrls: ['./match-details.page.scss']
 })
 export class MatchDetailsPage implements OnInit {
-  private matchDoc: AngularFirestoreDocument<Match>;
+  pageTitle = 'match summary';
   match: Match;
+  matchId: string;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private dbService: DbService,
-    public db: AngularFirestore,
-    private router: Router) { }
+    private router: Router,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -24,13 +27,35 @@ export class MatchDetailsPage implements OnInit {
         this.router.navigate(['./matches']);
         return;
       }
-      const matchId = paramMap.get('matchId');
+      this.matchId = paramMap.get('matchId');
 
-      this.dbService.getMatch(matchId).subscribe(result => {
+      this.dbService.getMatch(this.matchId).subscribe(result => {
         this.match = result;
-      })
       });
+    });
   }
 
-
+  onDecline() {
+    this.alertCtrl
+      .create({
+        header: 'u sure?',
+        message: 'the match report will be declined',
+        buttons: [
+          {
+            text: 'leave',
+            role: 'cancel'
+          },
+          {
+            text: 'decline',
+            handler: () => {
+              this.dbService.declineMatch(this.matchId);
+              this.router.navigate(['matches']);
+            }
+          }
+        ]
+      })
+      .then(alert => {
+        alert.present();
+      });
+  }
 }

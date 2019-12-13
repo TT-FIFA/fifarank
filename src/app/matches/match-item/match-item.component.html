@@ -1,3 +1,72 @@
-<!-- <ion-item [routerLink]="['/matches', matchItem.id]">
-  {{ matchItem.id }} -   {{ matchItem.player1 }}   {{ matchItem.score }}   {{ matchItem.player2 }}
-</ion-item> -->
+<ion-item button [routerLink]="['/matches', matchItem.id]">
+  <!-- ten grid ma ten głupi padding .item-inner:padding-right -->
+  <ion-grid>
+    <ion-chip>{{ matchItem.date }}</ion-chip>
+    <ion-chip>{{ matchItem.type }}</ion-chip>
+    <ion-row>
+      <ion-col size="2">
+        <ion-badge>{{ matchItem.daysAgo }} days ago</ion-badge>
+      </ion-col>
+      <ion-col size="3">
+        <ion-card color="dark">
+          <ion-card-header
+            class="ion-color"
+            [ngClass]="
+              matchItem.hostScore > matchItem.guestScore
+                ? 'ion-color-success'
+                : matchItem.hostScore == matchItem.guestScore
+                ? 'ion-color-warning'
+                : 'ion-color-danger'
+            "
+          >
+            {{ matchItem.hostName }}
+          </ion-card-header>
+          <ion-card-content class="ion-margin-top">
+            {{ matchItem.hostClub }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center"> {{ matchItem.hostScore }} : {{ matchItem.guestScore }} </ion-col>
+      <ion-col size="3">
+        <ion-card color="dark">
+          <ion-card-header
+            class="ion-color"
+            [ngClass]="
+              matchItem.guestScore > matchItem.hostScore
+                ? 'ion-color-success'
+                : matchItem.guestScore == matchItem.hostScore
+                ? 'ion-color-warning'
+                : 'ion-color-danger'
+            "
+          >
+            {{ matchItem.guestName }}
+          </ion-card-header>
+          <ion-card-content class="ion-margin-top">
+            <ion-icon name="football"></ion-icon>
+            {{ matchItem.guestClub }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="2">
+        <ion-fab>
+          <ion-fab-button>{{ matchItem.status }}</ion-fab-button>
+          <ion-fab-list side="top">
+            <ion-fab-button>accept</ion-fab-button>
+          </ion-fab-list>
+          <ion-fab-list side="start">
+            <ion-fab-button>decline</ion-fab-button>
+          </ion-fab-list>
+          <ion-fab-list side="bottom">
+            <ion-fab-button>edit</ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- zmusić tego div'a do zejścia ponieżej grid'a i zajęcia 100% szerokości -->
+  <!-- <div
+    [ngClass]="matchItem.hostScore > matchItem.guestScore ? 'host-win' : matchItem.hostScore == matchItem.guestScore ? 'draw' : 'guest-win'"
+  >
+    x
+  </div> -->
+</ion-item>

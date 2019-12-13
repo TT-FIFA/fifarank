@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
+import { Club } from '../club.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DbService {
   static MATCHES_PATH: string = 'matches';
   static PLAYERS_PATH: string = 'players';
+  static CLUBS_PATH: string = 'clubs';
 
   constructor(public db: AngularFirestore) {}
 
@@ -36,14 +38,26 @@ export class DbService {
     });
   }
 
+  declineMatch(matchId: string) {}
+
   getPlayers(): Observable<any> {
     return this.db.collection<Player>(DbService.PLAYERS_PATH).snapshotChanges();
   }
 
-  getPlayer(playerId: string): Observable<Player> {
+  // getPlayer(playerId: string): Observable<Player> {
+  //   return this.db
+  //     .collection<Player>(DbService.PLAYERS_PATH)
+  //     .doc<Player>(playerId)
+  //     .valueChanges();
+  // }
+
+  getPlayer(email: string): Observable<any> {
     return this.db
-      .collection<Player>(DbService.PLAYERS_PATH)
-      .doc<Player>(playerId)
-      .valueChanges();
+      .collection<Player>('players', ref => ref.where('id', '==', email))
+      .snapshotChanges();
+  }
+
+  getClubs(): Observable<any> {
+    return this.db.collection<Club>(DbService.CLUBS_PATH).snapshotChanges();
   }
 }

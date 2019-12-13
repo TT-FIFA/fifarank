@@ -9,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./match-list.page.scss']
 })
 export class MatchListPage implements OnInit {
+  pageTitle = 'matches';
   matches: Match[];
 
   constructor(private dbService: DbService, public db: AngularFirestore) {}

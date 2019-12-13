@@ -9,7 +9,8 @@ import { DbService } from 'src/app/services/db.service';
   styleUrls: ['./player-details.page.scss']
 })
 export class PlayerDetailsPage implements OnInit {
-  player: Player;
+  pageTitle = 'player details';
+  players: Player[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,7 +28,12 @@ export class PlayerDetailsPage implements OnInit {
       const playerId = paramMap.get('playerId');
 
       this.dbService.getPlayer(playerId).subscribe(data => {
-        this.player = data;
+        this.players = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          } as Player;
+        });
       });
     });
   }

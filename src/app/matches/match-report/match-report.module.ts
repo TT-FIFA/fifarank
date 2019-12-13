@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { MatchReportPageRoutingModule } from './match-report-routing.module';
-
 import { MatchReportPage } from './match-report.page';
+import { ComponentsModule } from '../../shared/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +12,8 @@ import { MatchReportPage } from './match-report.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    MatchReportPageRoutingModule
+    MatchReportPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [MatchReportPage]
 })
