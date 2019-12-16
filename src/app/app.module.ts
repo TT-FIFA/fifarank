@@ -15,7 +15,7 @@ import { DbService } from './services/db.service';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
-  // signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInSuccessUrl: 'dashboard',
   signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID, firebase.auth.GoogleAuthProvider.PROVIDER_ID],
   credentialHelper: firebaseui.auth.CredentialHelper.NONE
 };
