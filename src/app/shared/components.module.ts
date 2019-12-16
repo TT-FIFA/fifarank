@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 import { FirebaseUIModule } from 'firebaseui-angular';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FirebaseUIModule } from 'firebaseui-angular';
       }
     ])
   ],
-  declarations: [HeaderComponent],
+  entryComponents: [LoginComponent],
+  declarations: [HeaderComponent, LoginComponent],
   exports: [HeaderComponent]
 })
 export class ComponentsModule {}

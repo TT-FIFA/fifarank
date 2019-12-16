@@ -38,24 +38,29 @@ export class DbService {
     });
   }
 
+  approveMatch(matchId: string) {}
+
+  editMatch(matchId: string) {}
+
   declineMatch(matchId: string) {}
 
   getPlayers(): Observable<any> {
-    return this.db.collection<Player>(DbService.PLAYERS_PATH).snapshotChanges();
+    return this.db
+      .collection<Player>(DbService.PLAYERS_PATH, ref => ref.orderBy('points', 'desc'))
+      .snapshotChanges();
   }
-
-  // getPlayer(playerId: string): Observable<Player> {
-  //   return this.db
-  //     .collection<Player>(DbService.PLAYERS_PATH)
-  //     .doc<Player>(playerId)
-  //     .valueChanges();
-  // }
 
   getPlayer(email: string): Observable<any> {
     return this.db
       .collection<Player>('players', ref => ref.where('id', '==', email))
       .snapshotChanges();
   }
+  // getPlayer(playerId: string): Observable<Player> {
+  //   return this.db
+  //     .collection<Player>(DbService.PLAYERS_PATH)
+  //     .doc<Player>(playerId)
+  //     .valueChanges();
+  // }
 
   getClubs(): Observable<any> {
     return this.db.collection<Club>(DbService.CLUBS_PATH).snapshotChanges();

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ModalController, AlertController } from '@ionic/angular';
-import { FirebaseUIModule } from 'firebaseui-angular';
+import { PopoverController } from '@ionic/angular';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +10,12 @@ import { FirebaseUIModule } from 'firebaseui-angular';
 })
 export class HeaderComponent implements OnInit {
   @Input() pageTitle: string;
+  @Input() disableBackButton: boolean;
   displayName: string;
   email: string;
   uid: string;
 
-  constructor(public afAuth: AngularFireAuth, private modalCtrl: ModalController, private alertCtrl: AlertController) {}
+  constructor(public afAuth: AngularFireAuth, private popoverCtrl: PopoverController) {}
 
   ngOnInit() {
     this.afAuth.auth.onAuthStateChanged(user => {
@@ -27,43 +28,24 @@ export class HeaderComponent implements OnInit {
   }
 
   signIn() {
-    this.modalCtrl
+    this.popoverCtrl
       .create({
-        component: FirebaseUIModule
+        component: LoginComponent
       })
-      .then(modal => {
-        modal.present();
+      .then(popover => {
+        popover.present();
       });
   }
-
-  // signIn() {
-  //   this.alertCtrl
-  //   .create({
-  // header: 'u sure?',
-  // message: 'the match report will be declined',
-  // buttons: [
-  //   {
-  //     text: 'leave',
-  //     role: 'cancel'
-  //   },
-  //   {
-  //     text: 'decline',
-  //     handler: () => {
-  //       this.dbService.declineMatch(this.matchId);
-  //       this.router.navigate(['matches']);
-  //     }
-  //   }
-  // ]
-  // <firebase-ui></firebase-ui>
-  //   })
-  //   .then(alert => {
-  //     alert.present();
-  //   });
-  // }
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
       location.reload();
     });
+  }
+
+  newUser() {
+    // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    //   console.log(error);
+    // });
   }
 }
