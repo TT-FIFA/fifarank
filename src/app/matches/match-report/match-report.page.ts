@@ -17,6 +17,7 @@ export class MatchReportPage implements OnInit {
   players: Player[];
   clubs: Club[];
   matchReport: FormGroup;
+  guestName = 'andrzej';
 
   validation_messages = {
     date: [{ type: 'required', message: 'date is required.' }],

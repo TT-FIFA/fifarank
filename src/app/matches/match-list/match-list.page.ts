@@ -24,6 +24,7 @@ export class MatchListPage implements OnInit {
           daysAgo: this.calculatePastDays(e.payload.doc.get('date').seconds)
         } as Match;
       });
+      console.log(this.matches);
     });
   }
 
