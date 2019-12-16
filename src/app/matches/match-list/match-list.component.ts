@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Match } from '../match.model';
 import { DbService } from '../../services/db.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-match-list',
-  templateUrl: './match-list.page.html',
-  styleUrls: ['./match-list.page.scss']
+  templateUrl: './match-list.component.html',
+  styleUrls: ['./match-list.component.scss']
 })
-export class MatchListPage implements OnInit {
-  pageTitle = 'matches';
+export class MatchListComponent implements OnInit {
+  @Input() orderBy: string;
+  @Input() descending: string;
   matches: Match[];
 
   constructor(private dbService: DbService, public db: AngularFirestore) {}
 
   ngOnInit() {
-    this.dbService.getMatches().subscribe(data => {
+    this.dbService.getMatches(this.orderBy, this.descending).subscribe(data => {
       this.matches = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -24,7 +25,6 @@ export class MatchListPage implements OnInit {
           daysAgo: this.calculatePastDays(e.payload.doc.get('date').seconds)
         } as Match;
       });
-      console.log(this.matches);
     });
   }
 

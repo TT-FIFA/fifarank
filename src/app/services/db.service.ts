@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
 import { Club } from '../club.model';
@@ -13,8 +13,10 @@ export class DbService {
 
   constructor(public db: AngularFirestore) {}
 
-  getMatches(): Observable<any> {
-    return this.db.collection<Match>(DbService.MATCHES_PATH).snapshotChanges();
+  getMatches(orderBy: string, descending: string): Observable<any> {
+    return this.db
+      .collection<Match>(DbService.MATCHES_PATH, ref => ref.orderBy(orderBy, descending ? 'desc' : 'asc'))
+      .snapshotChanges();
   }
 
   getMatch(matchId: string): Observable<Match> {

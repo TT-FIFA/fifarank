@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./matches/match-list/match-list.module').then(m => m.MatchListPageModule)
+        loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
       },
       {
         path: ':matchId',

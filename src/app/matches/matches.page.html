@@ -1,0 +1,10 @@
+<app-header pageTitle="{{ pageTitle }}"></app-header>
+
+<ion-content>
+  <app-match-list orderBy="date" descending="true"></app-match-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/match-report">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
