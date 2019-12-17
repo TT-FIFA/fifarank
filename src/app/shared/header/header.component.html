@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>{{ pageTitle }}</ion-title>
     <ion-buttons slot="primary">
-      <ion-button *ngIf="displayName" [routerLink]="['/players', email]">
+      <ion-button *ngIf="displayName" [routerLink]="['/players', uid]">
         {{ displayName }}
         <ion-icon slot="start" name="contact"></ion-icon>
       </ion-button>

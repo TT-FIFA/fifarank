@@ -52,17 +52,50 @@ export class DbService {
       .snapshotChanges();
   }
 
-  getPlayer(email: string): Observable<any> {
+  getPlayer(playerId: string): Observable<any> {
     return this.db
-      .collection<Player>('players', ref => ref.where('id', '==', email))
+      .collection<Player>(DbService.PLAYERS_PATH)
+      .doc<Player>(playerId)
       .snapshotChanges();
   }
-  // getPlayer(playerId: string): Observable<Player> {
-  //   return this.db
-  //     .collection<Player>(DbService.PLAYERS_PATH)
-  //     .doc<Player>(playerId)
-  //     .valueChanges();
-  // }
+
+  createPlayer(id: string, name: string, email: string): Promise<any> {
+    return this.db
+      .collection<Player>(DbService.PLAYERS_PATH)
+      .doc<Player>(id)
+      .set(
+        {
+          name: name,
+          email: email,
+          points: '0',
+          matches: '0',
+          averageGoalRatio: '0',
+          favoriteClub: ''
+        },
+        { merge: true }
+      )
+      .then(docRef => {
+        console.log('Document written with ID: ', docRef);
+      })
+      .catch(error => {
+        console.error('Error adding document: ', error);
+      });
+  }
+
+  updatePlayerName(id: string, newName: string): Promise<any> {
+    return this.db
+      .collection<Player>(DbService.PLAYERS_PATH)
+      .doc<Player>(id)
+      .update({
+        name: newName
+      })
+      .then(docRef => {
+        console.log('Document updated');
+      })
+      .catch(error => {
+        console.error('Error updating document: ', error);
+      });
+  }
 
   getClubs(): Observable<any> {
     return this.db.collection<Club>(DbService.CLUBS_PATH).snapshotChanges();
