@@ -1,55 +1,55 @@
-<ion-item button [routerLink]="['/matches', matchItem.id]">
+<ion-item  button [routerLink]="['/matches', matchListItem.id]">
   <!-- ten grid ma ten głupi padding .item-inner:padding-right -->
   <ion-grid>
-    <ion-chip>{{ matchItem.date }}</ion-chip>
-    <ion-chip>{{ matchItem.type }}</ion-chip>
+    <ion-chip>{{ matchListItem.date }}</ion-chip>
+    <ion-chip>{{ matchListItem.type }}</ion-chip>
     <ion-row>
       <ion-col size="2">
-        <ion-badge>{{ matchItem.daysAgo }} days ago</ion-badge>
+        <ion-badge>{{ matchListItem.daysAgo }} days ago</ion-badge>
       </ion-col>
       <ion-col size="3">
         <ion-card color="dark">
           <ion-card-header
             class="ion-color"
             [ngClass]="
-              matchItem.hostScore > matchItem.guestScore
+              matchListItem.hostScore > matchListItem.guestScore
                 ? 'ion-color-success'
-                : matchItem.hostScore == matchItem.guestScore
+                : matchListItem.hostScore == matchListItem.guestScore
                 ? 'ion-color-warning'
                 : 'ion-color-danger'
             "
           >
-            {{ matchItem.hostName }}
+            {{ matchListItem.hostName }}
           </ion-card-header>
           <ion-card-content class="ion-margin-top">
-            {{ matchItem.hostClub }}
+            {{ matchListItem.hostClub }}
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="2" class="ion-text-center"> {{ matchItem.hostScore }} : {{ matchItem.guestScore }} </ion-col>
+      <ion-col size="2" class="ion-text-center"> {{ matchListItem.hostScore }} : {{ matchListItem.guestScore }} </ion-col>
       <ion-col size="3">
         <ion-card color="dark">
           <ion-card-header
             class="ion-color"
             [ngClass]="
-              matchItem.guestScore > matchItem.hostScore
+              matchListItem.guestScore > matchListItem.hostScore
                 ? 'ion-color-success'
-                : matchItem.guestScore == matchItem.hostScore
+                : matchListItem.guestScore == matchListItem.hostScore
                 ? 'ion-color-warning'
                 : 'ion-color-danger'
             "
           >
-            {{ matchItem.guestName }}
+            {{ matchListItem.guestName }}
           </ion-card-header>
           <ion-card-content class="ion-margin-top">
             <ion-icon name="football"></ion-icon>
-            {{ matchItem.guestClub }}
+            {{ matchListItem.guestClub }}
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col size="2">
         <ion-fab>
-          <ion-fab-button>{{ matchItem.status }}</ion-fab-button>
+          <ion-fab-button>{{ matchListItem.status }}</ion-fab-button>
           <ion-fab-list side="top">
             <ion-fab-button>accept</ion-fab-button>
           </ion-fab-list>
@@ -65,7 +65,7 @@
   </ion-grid>
   <!-- zmusić tego div'a do zejścia ponieżej grid'a i zajęcia 100% szerokości -->
   <!-- <div
-    [ngClass]="matchItem.hostScore > matchItem.guestScore ? 'host-win' : matchItem.hostScore == matchItem.guestScore ? 'draw' : 'guest-win'"
+    [ngClass]="matchListItem.hostScore > matchListItem.guestScore ? 'host-win' : matchListItem.hostScore == matchListItem.guestScore ? 'draw' : 'guest-win'"
   >
     x
   </div> -->

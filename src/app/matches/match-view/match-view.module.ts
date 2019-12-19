@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { MatchReportPageRoutingModule } from './match-report-routing.module';
-import { MatchReportPage } from './match-report.page';
+import { MatchViewPageRoutingModule } from './match-view-routing.module';
+import { MatchViewPage } from './match-view.page';
 import { ComponentsModule } from '../../shared/components.module';
 
 @NgModule({
@@ -12,9 +12,9 @@ import { ComponentsModule } from '../../shared/components.module';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    MatchReportPageRoutingModule,
+    MatchViewPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [MatchReportPage]
+  declarations: [MatchViewPage]
 })
-export class MatchReportPageModule {}
+export class MatchViewPageModule {}

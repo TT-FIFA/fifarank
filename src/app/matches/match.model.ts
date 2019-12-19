@@ -11,6 +11,7 @@ export interface Match {
   hostScore: number;
   guestScore: number;
   status: Status;
+  id: string;
 }
 
 export enum Type {

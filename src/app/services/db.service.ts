@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class DbService {
   static MATCHES_PATH: string = 'matches';
+  static SUMMARY_PATH: string = 'match-report';
   static PLAYERS_PATH: string = 'players';
   static CLUBS_PATH: string = 'clubs';
 

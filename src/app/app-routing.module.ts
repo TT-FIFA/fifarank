@@ -27,13 +27,13 @@ const routes: Routes = [
       },
       {
         path: ':matchId',
-        loadChildren: () => import('./matches/match-details/match-details.module').then(m => m.MatchDetailsPageModule)
+        loadChildren: () => import('./matches/match-view/match-view.module').then(m => m.MatchViewPageModule)
       }
     ]
   },
   {
     path: 'match-report',
-    loadChildren: () => import('./matches/match-report/match-report.module').then(m => m.MatchReportPageModule)
+    loadChildren: () => import('./matches/match-view/match-view.module').then(m => m.MatchViewPageModule)
   }
 ];
 

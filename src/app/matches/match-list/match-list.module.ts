@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { MatchListPageRoutingModule } from './match-list-routing.module';
 import { MatchListPage } from './match-list.page';
-import { MatchItemComponent } from '../match-item/match-item.component';
+import { MatchListItemComponent } from './match-list-item/match-list-item.component';
 import { ComponentsModule } from '../../shared/components.module';
 
 @NgModule({
@@ -22,6 +22,6 @@ import { ComponentsModule } from '../../shared/components.module';
     MatchListPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [MatchListPage, MatchItemComponent]
+  declarations: [MatchListPage, MatchListItemComponent]
 })
 export class MatchListPageModule {}

@@ -1,23 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
-import { Type } from '../match.model';
+import { Type, Match } from '../match.model';
 import { Player } from '../../players/player.model';
 import { Club } from '../../club.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-match-report',
-  templateUrl: './match-report.page.html',
-  styleUrls: ['./match-report.page.scss']
+  selector: 'app-match-view',
+  templateUrl: './match-view.page.html',
+  styleUrls: ['./match-view.page.scss']
 })
-export class MatchReportPage implements OnInit {
-  pageTitle = 'match report';
+export class MatchViewPage implements OnInit {
+  pageTitle = 'match view';
   types = Type;
   players: Player[];
   clubs: Club[];
   matchReport: FormGroup;
+  isForm: boolean;
+  match: Match;
+  matchId: string;
+  @Input() matchListItem: Match;
 
+  // tslint:disable-next-line: variable-name
   validation_messages = {
     date: [{ type: 'required', message: 'date is required.' }],
     type: [{ type: 'required', message: 'type is required.' }],
@@ -31,10 +37,27 @@ export class MatchReportPage implements OnInit {
     ]
   };
 
-  constructor(private dbService: DbService, private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private dbService: DbService,
+    public db: AngularFirestore,
+    private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.isForm = false;
     this.createForm();
+
+    if (window.location.pathname !== '/match-report') {
+      this.activatedRoute.paramMap.subscribe(paramMap => {
+        this.matchId = paramMap.get('matchId');
+
+        this.dbService.getMatch(this.matchId).subscribe(result => {
+          this.match = result;
+          console.log(this.match);
+        });
+      });
+    }
 
     this.dbService.getPlayers().subscribe(data => {
       this.players = data.map(e => {
@@ -95,5 +118,8 @@ export class MatchReportPage implements OnInit {
       this.router.navigate(['matches']);
       // wyświetl powiadomienie o sukcesie
     });
+  }
+  editMatch() {
+   this.isForm = true;
   }
 }

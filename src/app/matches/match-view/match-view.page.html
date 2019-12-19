@@ -2,7 +2,8 @@
 
 <ion-content>
   <!-- <ion-content class="ion-padding"> -->
-  <form [formGroup]="matchReport" (ngSubmit)="onSubmit(matchReport.value)">
+    <ng-container *ngIf="isForm;else summary">
+    <form [formGroup]="matchReport" (ngSubmit)="onSubmit(matchReport.value)">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size="7" size-sm="6" size-md="5" size-lg="4">
@@ -18,15 +19,19 @@
                   max="2020-12-31"
                   required
                   autofocus
+                  value="{{ match?.date}}"
                 ></ion-datetime>
+                
               </ion-item>
-              <ng-container *ngFor="let validation of validation_messages.date">
-                <ng-container
-                  *ngIf="matchReport.get('date').hasError(validation.type) && matchReport.get('date').touched; else elseBlock"
-                  >{{validation.message}}</ng-container
-                >
-                <ng-template #elseBlock>&nbsp;</ng-template>
-              </ng-container>
+                        
+                <ng-container *ngFor="let validation of validation_messages.date">
+                  <ng-container
+                    *ngIf="matchReport.get('date').hasError(validation.type) && matchReport.get('date').touched; else elseBlock"
+                    >{{validation.message}}
+                  </ng-container>
+                  <ng-template #elseBlock>&nbsp;</ng-template>
+                </ng-container>
+            
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -36,10 +41,10 @@
               <ion-item>
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
-                <ion-select formControlName="type" multiple="false" required>
-                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}"
-                    >{{ type.value }}</ion-select-option
-                  >
+                <ion-select formControlName="type" multiple="false" value="{{ match?.type }}" required>
+                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}">
+                    {{ type.value }}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.type">
@@ -60,18 +65,20 @@
               <ion-label position="stacked">home</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="hostName" multiple="false" required>
-                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
-                    >{{ player.name }}</ion-select-option
-                  >
-                </ion-select></ion-item
-              ><ion-item>
-                <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="hostClub" multiple="false" required>
-                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
-                    >{{ club.name }}</ion-select-option
-                  >
+                <ion-select formControlName="hostName" multiple="false" value="{{ match?.hostName }}" required>
+                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}">
+                    {{ player.name }}
+                  </ion-select-option>
                 </ion-select>
+                </ion-item
+              ><ion-item>
+                  
+                <ion-label position="stacked">club</ion-label>
+                <ion-select formControlName="hostClub" multiple="false" value="{{match?.hostClub}}" required>
+                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}">
+                    {{ club.name }}
+                  </ion-select-option>
+                </ion-select>    
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.hostName">
                 <ng-container
@@ -99,8 +106,10 @@
                       min="0"
                       pattern="[0-9]{1,2}"
                       required
-                    ></ion-input>
+                      value="{{match?.hostScore}}"
+                    > </ion-input>
                   </ion-item>
+                 
                 </ion-col>
                 :
                 <ion-col class="ion-no-padding">
@@ -113,8 +122,9 @@
                       inputmode="numeric"
                       min="0"
                       pattern="[0-9]{1,2}"
-                      required
-                    ></ion-input>
+                      value="{{match?.guestScore}}"
+                      required>
+                    </ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -134,17 +144,19 @@
               <ion-label position="stacked">away</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="guestName" multiple="false" required>
-                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
-                    >{{ player.name }}</ion-select-option
-                  >
-                </ion-select> </ion-item
-              ><ion-item>
+                <ion-select formControlName="guestName" multiple="false" value="{{match?.guestName}}" required>
+                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}">
+                    {{ player.name }}
+                  </ion-select-option>
+                </ion-select> 
+                </ion-item>
+                <ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="guestClub" multiple="false" required>
+                <ion-select formControlName="guestClub" multiple="false" value="{{match?.guestClub}}" required>
                   <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
                     >{{ club.name }}</ion-select-option
                   >
+               
                 </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.guestName">
@@ -157,7 +169,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-      </ion-row>
+        </ion-row>
       <ion-row>
         <ion-buttons>
           <ion-button fill="solid"><ion-icon name="color-wand"></ion-icon>magia</ion-button>
@@ -165,9 +177,92 @@
             <ion-icon name="close"></ion-icon>
             clear
           </ion-button>
+          <ion-button (click)="editMatch()"  fill="solid"> <ion-icon name="football"></ion-icon>edit</ion-button>
           <ion-button type="submit" [disabled]="!matchReport.valid" fill="solid" color="primary">report</ion-button>
         </ion-buttons>
       </ion-row>
     </ion-grid>
   </form>
+</ng-container>
+<ng-template #summary >
+    <ion-content class="height: 100vh">
+        <ion-grid class="ion-text-center" >
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="7" size-sm="6" size-md="5" size-lg="4">
+              <ion-card>
+                <ion-card-content>
+                  <ion-item>
+                    <ion-label position="stacked">date:</ion-label>
+                    {{ match?.date }}
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" size-sm="9" size-md="4">
+              <ion-card>
+                <ion-card-content>
+                  <ion-label position="stacked">home</ion-label>
+                  <ion-item class="ion-activatable">
+                    <ion-label position="stacked">host:</ion-label>
+                    {{ match?.hostName }}
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="5" offset="4" size-md="4" offset-md="0" size-lg="4">
+              <ion-card>
+                <ion-card-content>
+                  <ion-label position="stacked">score</ion-label>
+                  <ion-row>
+                    <ion-col class="ion-no-padding">
+                      <ion-item class="ion-activatable">
+                        <ion-label position="stacked">home</ion-label>
+                        {{ match?.hostScore }}
+                      </ion-item>
+                    </ion-col>
+                    :
+                    <ion-col class="ion-no-padding">
+                      <ion-item class="ion-activatable">
+                        <ion-label position="stacked">away</ion-label>
+                        {{ match?.guestScore }}
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="10" offset="2" size-sm="9" offset-sm="3" size-md="4" offset-md="0" size-lg="4">
+              <ion-card>
+                <ion-card-content>
+                  <ion-label position="stacked">away</ion-label>
+                  <ion-item class="ion-activatable">
+                    <ion-label position="stacked">guest:</ion-label>
+                    {{ match?.guestName }}
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-buttons>
+              <ion-button fill="solid" color="primary"><ion-icon name="color-wand"></ion-icon>accept</ion-button>
+              <ion-button (click)="editMatch()" fill="solid"><ion-icon name="football"></ion-icon>edit</ion-button>
+              <ion-button fill="outline" color="danger" (click)="onDecline()">
+                <ion-icon name="close"></ion-icon>
+                decline
+              </ion-button>
+            </ion-buttons>
+          </ion-row>
+        </ion-grid>
+      
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button routerLink="/match-report">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-content>
+</ng-template>
 </ion-content>
+

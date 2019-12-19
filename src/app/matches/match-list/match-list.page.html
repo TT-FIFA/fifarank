@@ -19,7 +19,7 @@
         status
       </ion-col>
     </ion-list-header>
-    <app-match-item *ngFor="let match of matches" [matchItem]="match"></app-match-item>
+    <app-match-list-item *ngFor="let match of matches" [matchListItem]="match"></app-match-list-item>
     <!-- skeleton text start -->
     <ng-container *ngIf="!matches">
       <ion-item *ngFor="let iteration of [1,2,3]">
