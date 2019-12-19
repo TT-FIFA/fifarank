@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { Type } from '../match.model';
 import { Player } from '../../players/player.model';
-import { Club } from '../../club.model';
+import { Club } from '../../clubs/club.model';
+import { ClubsPage } from '../../clubs/clubs.page';
 
 @Component({
   selector: 'app-match-report',
@@ -17,7 +18,6 @@ export class MatchReportPage implements OnInit {
   players: Player[];
   clubs: Club[];
   matchReport: FormGroup;
-  guestName = 'andrzej';
 
   validation_messages = {
     date: [{ type: 'required', message: 'date is required.' }],
@@ -32,7 +32,12 @@ export class MatchReportPage implements OnInit {
     ]
   };
 
-  constructor(private dbService: DbService, private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private clubService: ClubsPage,
+    private dbService: DbService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -46,14 +51,7 @@ export class MatchReportPage implements OnInit {
       });
     });
 
-    this.dbService.getClubs().subscribe(data => {
-      this.clubs = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Club;
-      });
-    });
+    this.clubs = this.clubService.getClubs();
   }
 
   createForm() {

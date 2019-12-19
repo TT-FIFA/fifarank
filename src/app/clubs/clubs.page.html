@@ -1,0 +1,10 @@
+<app-header pageTitle="{{ pageTitle }}"></app-header>
+
+<ion-content>
+  <ion-list *ngFor="let club of clubs">
+    <ion-item>
+      name: {{ club.name }}<br />
+      overall: {{ club.overall }}
+    </ion-item>
+  </ion-list>
+</ion-content>

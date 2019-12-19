@@ -1,6 +1,3 @@
-import { Player } from '../players/player.model';
-import { Timestamp } from 'rxjs';
-
 export interface Match {
   date: string;
   type: Type;

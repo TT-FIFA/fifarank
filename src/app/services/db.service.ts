@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
-import { Club } from '../club.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DbService {
   static MATCHES_PATH: string = 'matches';
   static PLAYERS_PATH: string = 'players';
+  static LEAGUES_PATH: string = 'leagues';
   static CLUBS_PATH: string = 'clubs';
 
   constructor(public db: AngularFirestore) {}
