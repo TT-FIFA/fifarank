@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
+import { Club } from '../clubs/club.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
