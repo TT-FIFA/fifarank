@@ -36,7 +36,7 @@
               <ion-item>
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
-                <ion-select formControlName="type" multiple="false" required>
+                <ion-select formControlName="type" required>
                   <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}"
                     >{{ type.value }}</ion-select-option
                   >
@@ -60,14 +60,14 @@
               <ion-label position="stacked">home</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="hostName" multiple="false" required>
+                <ion-select formControlName="hostName" required>
                   <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
                     >{{ player.name }}</ion-select-option
                   >
                 </ion-select></ion-item
               ><ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="hostClub" multiple="false" required>
+                <ion-select formControlName="hostClub" required>
                   <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
                     >{{ club.name }}</ion-select-option
                   >
@@ -134,14 +134,14 @@
               <ion-label position="stacked">away</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="guestName" multiple="false" required>
+                <ion-select formControlName="guestName" required>
                   <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
                     >{{ player.name }}</ion-select-option
                   >
                 </ion-select> </ion-item
               ><ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="guestClub" multiple="false" required>
+                <ion-select formControlName="guestClub" required>
                   <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
                     >{{ club.name }}</ion-select-option
                   >
