@@ -1,12 +1,69 @@
-[
-  {
-    "id": "1647",
-    "name": "Wisła Kraków",
-    "overall": 199
-  },
-  {
-    "id": "1648",
-    "name": "Legia Warszawa",
-    "overall": 268
-  }
-]
+{
+  "name": "ekstraklasa",
+  "clubs": [
+    {
+      "id": "1647",
+      "name": "Wisła Kraków"
+    },
+    {
+      "id": "1648",
+      "name": "Legia Warszawa"
+    },
+    {
+      "id": "1651",
+      "name": "Wisła Płock"
+    },
+    {
+      "id": "1653",
+      "name": "Lech Poznań"
+    },
+    {
+      "id": "1655",
+      "name": "Górnik Zabrze"
+    },
+    {
+      "id": "1661",
+      "name": "Pogoń Szczecin"
+    },
+    {
+      "id": "1663",
+      "name": "Zagłębie Lubin"
+    },
+    {
+      "id": "1664",
+      "name": "Cracovia"
+    },
+    {
+      "id": "1670",
+      "name": "Jagiellonia Białystok"
+    },
+    {
+      "id": "1671",
+      "name": "ŁKS Łódź"
+    },
+    {
+      "id": "1672",
+      "name": "Arka Gdynia"
+    },
+    {
+      "id": "1673",
+      "name": "Piast Gliwice"
+    },
+    {
+      "id": "3109",
+      "name": "Śląsk Wrocław"
+    },
+    {
+      "id": "3113",
+      "name": "Raków Częstochowa"
+    },
+    {
+      "id": "3121",
+      "name": "Korona Kielce"
+    },
+    {
+      "id": "3133",
+      "name": "Lechia Gdańsk"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Club } from './club.model';
+import { League } from './league.model';
 import bundesliga from '../../assets/clubs/bundesliga.json';
 import ekstraklasa from '../../assets/clubs/ekstraklasa.json';
 import laliga from '../../assets/clubs/laliga.json';
@@ -14,9 +14,9 @@ import seriea from '../../assets/clubs/seriea.json';
 })
 export class ClubsPage {
   private pageTitle = 'clubs';
-  private clubs: Club[] = [].concat(bundesliga, ekstraklasa, laliga, ligue1, premierleague, seriea);
+  private leagues = [bundesliga, ekstraklasa, laliga, ligue1, premierleague, seriea];
 
-  getClubs(): Club[] {
-    return this.clubs;
+  getClubs(): League[] {
+    return this.leagues;
   }
 }
