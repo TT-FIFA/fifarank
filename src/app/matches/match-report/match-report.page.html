@@ -1,7 +1,6 @@
 <app-header pageTitle="{{ pageTitle }}"></app-header>
 
 <ion-content>
-  <!-- <ion-content class="ion-padding"> -->
   <form [formGroup]="matchReport" (ngSubmit)="onSubmit(matchReport.value)">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
@@ -18,14 +17,18 @@
                   max="2020-12-31"
                   required
                   autofocus
-                ></ion-datetime>
+                >
+                </ion-datetime>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.date">
                 <ng-container
                   *ngIf="matchReport.get('date').hasError(validation.type) && matchReport.get('date').touched; else elseBlock"
-                  >{{validation.message}}</ng-container
                 >
-                <ng-template #elseBlock>&nbsp;</ng-template>
+                  {{validation.message}}
+                </ng-container>
+                <ng-template #elseBlock>
+                  &nbsp;
+                </ng-template>
               </ng-container>
             </ion-card-content>
           </ion-card>
@@ -36,18 +39,21 @@
               <ion-item>
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
-                <ion-select formControlName="type" required>
-                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}"
-                    >{{ type.value }}</ion-select-option
-                  >
+                <ion-select formControlName="type" required interface="popover">
+                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}">
+                    {{ type.value }}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.type">
                 <ng-container
                   *ngIf="matchReport.get('type').hasError(validation.type) && matchReport.get('type').touched; else elseBlock"
-                  >{{validation.message}}</ng-container
                 >
-                <ng-template #elseBlock>&nbsp;</ng-template>
+                  {{validation.message}}
+                </ng-container>
+                <ng-template #elseBlock>
+                  &nbsp;
+                </ng-template>
               </ng-container>
             </ion-card-content>
           </ion-card>
@@ -60,17 +66,23 @@
               <ion-label position="stacked">home</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="hostName" required>
+                <ion-select formControlName="hostName" required interface="popover">
                   <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
                     >{{ player.name }}</ion-select-option
                   >
-                </ion-select></ion-item
-              ><ion-item>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="hostClub" required>
-                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
-                    >{{ club.name }}</ion-select-option
-                  >
+                <ion-select formControlName="hostClub" required interface="popover">
+                  <ion-item *ngFor="let league of leagues">
+                    <ion-select-option class="leagueName" disabled>
+                      {{ league.name }}
+                    </ion-select-option>
+                    <ion-select-option *ngFor="let club of league.clubs" value="{{ club.name }}">
+                      {{ club.name }}
+                    </ion-select-option>
+                  </ion-item>
                 </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.hostName">
@@ -134,24 +146,31 @@
               <ion-label position="stacked">away</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="guestName" required>
-                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}"
-                    >{{ player.name }}</ion-select-option
-                  >
-                </ion-select> </ion-item
-              ><ion-item>
+                <ion-select formControlName="guestName" required interface="popover">
+                  <ion-select-option *ngFor="let player of players" value="{{ player.name }}">
+                    {{ player.name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select formControlName="guestClub" required>
-                  <ion-select-option *ngFor="let club of clubs" value="{{ club.name }}"
-                    >{{ club.name }}</ion-select-option
-                  >
+                <ion-select formControlName="guestClub" required interface="popover">
+                  <ion-item *ngFor="let league of leagues">
+                    <ion-select-option class="leagueName" disabled>
+                      {{ league.name }}
+                    </ion-select-option>
+                    <ion-select-option *ngFor="let club of league.clubs" value="{{ club.name }}">
+                      {{ club.name }}
+                    </ion-select-option>
+                  </ion-item>
                 </ion-select>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.guestName">
                 <ng-container
                   *ngIf="matchReport.get('guestName').hasError(validation.type) && (matchReport.get('guestName').dirty || matchReport.get('guestName').touched); else elseBlock"
-                  >{{validation.message}}</ng-container
                 >
+                  {{validation.message}}
+                </ng-container>
                 <ng-template #elseBlock>&nbsp;</ng-template>
               </ng-container>
             </ion-card-content>
@@ -160,7 +179,10 @@
       </ion-row>
       <ion-row>
         <ion-buttons>
-          <ion-button fill="solid"><ion-icon name="color-wand"></ion-icon>magia</ion-button>
+          <ion-button fill="solid">
+            <ion-icon name="color-wand"></ion-icon>
+            magia
+          </ion-button>
           <ion-button fill="outline" color="danger" (click)="resetFields()">
             <ion-icon name="close"></ion-icon>
             clear

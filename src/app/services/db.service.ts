@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, Query } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
-import { Club } from '../clubs/club.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DbService {
   static MATCHES_PATH: string = 'matches';
   static PLAYERS_PATH: string = 'players';
-  static LEAGUES_PATH: string = 'leagues';
-  static CLUBS_PATH: string = 'clubs';
 
   constructor(public db: AngularFirestore) {}
 
@@ -96,9 +93,5 @@ export class DbService {
       .catch(error => {
         console.error('Error updating document: ', error);
       });
-  }
-
-  getClubs(): Observable<any> {
-    return this.db.collection<Club>(DbService.CLUBS_PATH).snapshotChanges();
   }
 }

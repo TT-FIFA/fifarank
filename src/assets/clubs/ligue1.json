@@ -1,12 +1,85 @@
-[
-  {
-    "id": "884",
-    "name": "Olympique Lyonnais",
-    "overall": 270
-  },
-  {
-    "id": "885",
-    "name": "AS Monaco",
-    "overall": 268
-  }
-]
+{
+  "name": "ligue 1",
+  "clubs": [
+    {
+      "id": "884",
+      "name": "Olympique Lyonnais"
+    },
+    {
+      "id": "885",
+      "name": "AS Monaco"
+    },
+    {
+      "id": "886",
+      "name": "Paris Saint-Germain"
+    },
+    {
+      "id": "889",
+      "name": "FC Nantes"
+    },
+    {
+      "id": "890",
+      "name": "Olympique de Marseille"
+    },
+    {
+      "id": "891",
+      "name": "Girondins de Bordeaux"
+    },
+    {
+      "id": "893",
+      "name": "Stade Rennais FC"
+    },
+    {
+      "id": "894",
+      "name": "OGC Nice"
+    },
+    {
+      "id": "895",
+      "name": "LOSC Lille"
+    },
+    {
+      "id": "896",
+      "name": "FC Metz"
+    },
+    {
+      "id": "898",
+      "name": "RC Strasbourg Alsace"
+    },
+    {
+      "id": "899",
+      "name": "Toulouse FC"
+    },
+    {
+      "id": "901",
+      "name": "AS Saint-Étienne"
+    },
+    {
+      "id": "906",
+      "name": "Montpellier HSC"
+    },
+    {
+      "id": "908",
+      "name": "Amiens SC"
+    },
+    {
+      "id": "918",
+      "name": "Angers SCO"
+    },
+    {
+      "id": "921",
+      "name": "Stade de Reims"
+    },
+    {
+      "id": "922",
+      "name": "Stade Brestois 29"
+    },
+    {
+      "id": "923",
+      "name": "Dijon FCO"
+    },
+    {
+      "id": "932",
+      "name": "Nîmes Olympique"
+    }
+  ]
+}

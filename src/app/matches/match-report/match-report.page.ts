@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { Type } from '../match.model';
 import { Player } from '../../players/player.model';
-import { Club } from '../../clubs/club.model';
+import { League } from '../../clubs/league.model';
 import { ClubsPage } from '../../clubs/clubs.page';
 
 @Component({
@@ -16,7 +16,7 @@ export class MatchReportPage implements OnInit {
   pageTitle = 'match report';
   types = Type;
   players: Player[];
-  clubs: Club[];
+  leagues: League[];
   matchReport: FormGroup;
 
   validation_messages = {
@@ -51,7 +51,7 @@ export class MatchReportPage implements OnInit {
       });
     });
 
-    this.clubs = this.clubService.getClubs();
+    this.leagues = this.clubService.getClubs();
   }
 
   createForm() {

@@ -1,12 +1,85 @@
-[
-  {
-    "id": "1240",
-    "name": "AC Milan",
-    "overall": 235
-  },
-  {
-    "id": "1241",
-    "name": "Roma",
-    "overall": 234
-  }
-]
+{
+  "name": "serie a",
+  "clubs": [
+    {
+      "id": "1240",
+      "name": "Milan"
+    },
+    {
+      "id": "1241",
+      "name": "Roma"
+    },
+    {
+      "id": "1242",
+      "name": "Juventus"
+    },
+    {
+      "id": "1243",
+      "name": "Parma"
+    },
+    {
+      "id": "1244",
+      "name": "Internazionale"
+    },
+    {
+      "id": "1245",
+      "name": "Lazio"
+    },
+    {
+      "id": "1246",
+      "name": "Udinese"
+    },
+    {
+      "id": "1247",
+      "name": "Sampdoria"
+    },
+    {
+      "id": "1249",
+      "name": "Bologna"
+    },
+    {
+      "id": "1250",
+      "name": "Brescia"
+    },
+    {
+      "id": "1251",
+      "name": "Lecce"
+    },
+    {
+      "id": "1255",
+      "name": "Atalanta"
+    },
+    {
+      "id": "1256",
+      "name": "Cagliari"
+    },
+    {
+      "id": "1259",
+      "name": "Fiorentina"
+    },
+    {
+      "id": "1268",
+      "name": "Torino"
+    },
+    {
+      "id": "1270",
+      "name": "Napoli"
+    },
+    {
+      "id": "1276",
+      "name": "Genoa"
+    },
+    {
+      "id": "1277",
+      "name": "Hellas Verona"
+    },
+    {
+      "id": "1287",
+      "name": "SPAL"
+    },
+    {
+      "id": "5681",
+      "name": "Sassuolo"
+    }
+  ]
+}

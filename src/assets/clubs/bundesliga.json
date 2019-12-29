@@ -1,12 +1,77 @@
-[
-  {
-    "id": "960",
-    "name": "Werder Bremen",
-    "overall": 212
-  },
-  {
-    "id": "961",
-    "name": "Bayern Monachium",
-    "overall": 301
-  }
-]
+{
+  "name": "bundesliga",
+  "clubs": [
+    {
+      "id": "960",
+      "name": "Werder Bremen"
+    },
+    {
+      "id": "961",
+      "name": "Bayern Munich"
+    },
+    {
+      "id": "963",
+      "name": "Bayer Leverkusen"
+    },
+    {
+      "id": "964",
+      "name": "Borussia Dortmund"
+    },
+    {
+      "id": "966",
+      "name": "Schalke 04"
+    },
+    {
+      "id": "968",
+      "name": "VfL Wolfsburg"
+    },
+    {
+      "id": "970",
+      "name": "SC Freiburg"
+    },
+    {
+      "id": "971",
+      "name": "Borussia Mönchengladbach"
+    },
+    {
+      "id": "974",
+      "name": "Hertha BSC"
+    },
+    {
+      "id": "977",
+      "name": "Mainz 05"
+    },
+    {
+      "id": "979",
+      "name": "Eintracht Frankfurt"
+    },
+    {
+      "id": "980",
+      "name": "1. FC Köln"
+    },
+    {
+      "id": "1000",
+      "name": "FC Augsburg"
+    },
+    {
+      "id": "1001",
+      "name": "1899 Hoffenheim"
+    },
+    {
+      "id": "1013",
+      "name": "SC Paderborn"
+    },
+    {
+      "id": "1026",
+      "name": "Union Berlin"
+    },
+    {
+      "id": "1029",
+      "name": "Fortuna Düsseldorf"
+    },
+    {
+      "id": "13410",
+      "name": "RB Leipzig"
+    }
+  ]
+}

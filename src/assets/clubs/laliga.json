@@ -1,12 +1,85 @@
-[
-  {
-    "id": "2015",
-    "name": "Valencia",
-    "overall": 277
-  },
-  {
-    "id": "2016",
-    "name": "Real Madrid",
-    "overall": 313
-  }
-]
+{
+  "name": "la liga",
+  "clubs": [
+    {
+      "id": "2015",
+      "name": "Valencia"
+    },
+    {
+      "id": "2016",
+      "name": "Real Madrid"
+    },
+    {
+      "id": "2017",
+      "name": "Barcelona"
+    },
+    {
+      "id": "2019",
+      "name": "Athletic Bilbao"
+    },
+    {
+      "id": "2020",
+      "name": "Atlético Madrid"
+    },
+    {
+      "id": "2021",
+      "name": "Sevilla"
+    },
+    {
+      "id": "2022",
+      "name": "Osasuna"
+    },
+    {
+      "id": "2023",
+      "name": "Villareal"
+    },
+    {
+      "id": "2025",
+      "name": "Real Betis"
+    },
+    {
+      "id": "2027",
+      "name": "Mallorca"
+    },
+    {
+      "id": "2028",
+      "name": "Real Sociedad"
+    },
+    {
+      "id": "2031",
+      "name": "Valladolid"
+    },
+    {
+      "id": "2032",
+      "name": "Espanyol"
+    },
+    {
+      "id": "2033",
+      "name": "Celta Vigo"
+    },
+    {
+      "id": "2036",
+      "name": "Levante"
+    },
+    {
+      "id": "2037",
+      "name": "Alavés"
+    },
+    {
+      "id": "2039",
+      "name": "Getafe"
+    },
+    {
+      "id": "2042",
+      "name": "Eibar"
+    },
+    {
+      "id": "2053",
+      "name": "Leganés"
+    },
+    {
+      "id": "7072",
+      "name": "Granada"
+    }
+  ]
+}
