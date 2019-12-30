@@ -4,27 +4,23 @@
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
     <ion-title>{{ pageTitle }}</ion-title>
-    <ion-buttons slot="primary">
+    <ion-buttons *ngIf="afAuth.auth.currentUser; else signInButton" slot="primary">
       <ion-button *ngIf="displayName" [routerLink]="['/players', uid]">
         {{ displayName }}
         <ion-icon slot="start" name="contact"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="afAuth.auth.currentUser; else signInButton" (click)="signOut()">
+      <ion-button (click)="signOut()">
         sign out
         <ion-icon slot="end" name="log-out"></ion-icon>
       </ion-button>
-      <ng-template #signInButton>
+    </ion-buttons>
+    <ng-template #signInButton>
+      <ion-buttons slot="primary">
         <ion-button (click)="signIn()">
           sign in
           <ion-icon slot="end" name="log-in"></ion-icon>
         </ion-button>
-      </ng-template>
-      <ion-button>
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+      </ion-buttons>
+    </ng-template>
   </ion-toolbar>
 </ion-header>
