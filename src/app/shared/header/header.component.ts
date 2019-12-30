@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private popoverCtrl: PopoverController) {}
 
   ngOnInit() {
-    this.afAuth.auth.onAuthStateChanged(user => {
+    this.afAuth.authState.subscribe(user => {
       if (user) {
         this.displayName = user.displayName;
         this.email = user.email;
