@@ -65,10 +65,9 @@ export class DbService {
         {
           name: name,
           email: email,
-          points: '0',
-          matches: '0',
-          averageGoalRatio: '0',
-          favoriteClub: ''
+          points: 0,
+          matches: 0,
+          averageGoalRatio: 0
         },
         { merge: true }
       )
