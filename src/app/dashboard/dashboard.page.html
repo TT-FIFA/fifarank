@@ -1,11 +1,13 @@
-<!-- <app-header pageTitle="{{ pageTitle }}" [disableBackButton]="true"></app-header> -->
-
 <ion-content class="ion-padding">
+  <ion-button *ngIf="playerDoesntExists" (click)="createPlayerAlert()" color="success">
+    <ion-icon name="person-add" slot="start"></ion-icon>
+    join the game, create player!
+  </ion-button>
   <ion-button routerLink="/players">players</ion-button>
   <ion-button routerLink="/matches">matches</ion-button>
-  <ion-button routerLink="/match-report">
-    <ion-icon name="add-circle"></ion-icon>
+  <ion-button routerLink="/clubs">clubs</ion-button>
+  <ion-button routerLink="/match-report" color="success">
+    <ion-icon name="clipboard" slot="start"></ion-icon>
     report a match
   </ion-button>
-  <ion-button routerLink="/clubs">clubs</ion-button>
 </ion-content>

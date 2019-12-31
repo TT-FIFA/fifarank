@@ -1,38 +1,35 @@
-<!-- <app-header pageTitle="{{ pageTitle }}"></app-header> -->
-
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="player">
     <ion-item>
       <ion-label position="stacked">id</ion-label>
-      <ng-container *ngIf="playerId; else blank">{{ playerId }}</ng-container>
+      {{ playerId }}
     </ion-item>
     <ion-item>
       <ion-label position="stacked">name</ion-label>
-      <ng-container *ngIf="player?.name; else blank">{{ player?.name }}</ng-container>
+      {{ player.name }}
     </ion-item>
     <ion-item>
       <ion-label position="stacked">email</ion-label>
-      <ng-container *ngIf="player?.email; else blank">{{ player?.email }}</ng-container>
+      {{ player.email }}
     </ion-item>
     <ion-item>
       <ion-label position="stacked">points</ion-label>
-      <ng-container *ngIf="player?.points; else blank">{{ player?.points }}</ng-container>
+      {{ player.points }}
     </ion-item>
     <ion-item>
       <ion-label position="stacked">matches</ion-label>
-      <ng-container *ngIf="player?.matches; else blank">{{ player?.matches }}</ng-container>
+      {{ player.matches }}
     </ion-item>
     <ion-item>
       <ion-label position="stacked">average goal ratio</ion-label>
-      <ng-container *ngIf="player?.averageGoalRatio; else blank">{{ player?.averageGoalRatio }}</ng-container>
+      {{ player.averageGoalRatio }}
     </ion-item>
-    <ng-template #blank>. . .</ng-template>
   </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar *ngIf="player" color="success">
-    <ion-button expand="full" fill="clear" color="light" (click)="nameChangeAlert()">
+  <ion-toolbar *ngIf="player && userId===playerId" color="success">
+    <ion-button expand="full" fill="clear" color="light" (click)="changeDisplayName()">
       <ion-icon name="save" slot="start"></ion-icon>
       change name
     </ion-button>
