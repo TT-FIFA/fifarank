@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Player } from '../player.model';
@@ -14,43 +14,43 @@ export class PlayerDetailsPage implements OnInit {
   pageTitle = 'player details';
   player: Player;
   playerId: string;
-  exists: string;
-  email: string;
-  displayName: string;
+  userId: string;
 
   constructor(
     public afAuth: AngularFireAuth,
     private activatedRoute: ActivatedRoute,
     public dbService: DbService,
-    private toastCtrl: ToastController,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      this.escapeIfNoId(paramMap);
-      this.playerId = paramMap.get('playerId');
-      this.getOrCreatePlayer();
+      this.escapeIfNoPlayerId(paramMap);
+      let playerId = paramMap.get('playerId');
+      this.getPlayerOrEscape(playerId);
     });
 
-    this.getPlayerProfile();
+    this.getUserId();
   }
 
-  escapeIfNoId(paramMap) {
+  escapeIfNoPlayerId(paramMap) {
     if (!paramMap.has('playerId')) {
       this.router.navigate(['./players']);
     }
   }
 
-  getOrCreatePlayer() {
-    this.dbService.getPlayer(this.playerId).subscribe(
+  getPlayerOrEscape(playerId: string) {
+    this.dbService.getPlayer(playerId).subscribe(
       data => {
-        this.exists = data.payload.exists;
-        if (this.exists) {
+        if (data.payload.exists) {
+          console.log('data.payload.data(): ', data.payload.data());
           this.player = data.payload.data();
+          console.log('this.player: ', this.player);
+          this.playerId = playerId;
         } else {
-          this.playerCreationAlert();
+          this.router.navigate(['./players']);
         }
       },
       error => {
@@ -62,58 +62,15 @@ export class PlayerDetailsPage implements OnInit {
     );
   }
 
-  playerCreationAlert() {
-    this.alertCtrl
-      .create({
-        header: 'new player creation',
-        subHeader: 'input display name',
-        inputs: [
-          {
-            name: 'name',
-            type: 'text',
-            value: this.displayName
-          }
-        ],
-        buttons: [
-          {
-            text: 'cancel',
-            role: 'cancel'
-            // tutaj handler gdy cancel
-          },
-          {
-            text: 'create',
-            handler: inputs => {
-              this.createPlayer(inputs.name);
-            }
-          }
-        ]
-      })
-      .then(alert => {
-        alert.present();
-      });
-  }
-
-  getPlayerProfile() {
-    this.afAuth.auth.onAuthStateChanged(user => {
+  getUserId() {
+    this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.displayName = user.displayName;
-        this.email = user.email;
+        this.userId = user.uid;
       }
     });
   }
 
-  createPlayer(name: string) {
-    this.dbService.createPlayer(this.playerId, name, this.email).then(
-      () => {
-        this.showToast('Player added');
-      },
-      err => {
-        this.showToast('There was a problem adding your player :(');
-      }
-    );
-  }
-
-  nameChangeAlert() {
+  changeDisplayName() {
     this.alertCtrl
       .create({
         header: 'player name change',
