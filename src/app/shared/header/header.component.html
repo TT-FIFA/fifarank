@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons *ngIf="!disableBackButton" slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{ pageTitle }}</ion-title>
     <ion-buttons *ngIf="afAuth.auth.currentUser; else signInButton" slot="primary">
