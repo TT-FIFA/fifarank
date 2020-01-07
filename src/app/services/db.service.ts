@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, Query } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
-import { Observable } from 'rxjs';
+import { Club } from '../clubs/club.model';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class DbService {
@@ -15,6 +17,22 @@ export class DbService {
     return this.db
       .collection<Match>(DbService.MATCHES_PATH, ref => ref.orderBy(orderBy, descending ? 'desc' : 'asc'))
       .snapshotChanges();
+  }
+
+  getPlayerMatches(playerName: string, orderBy: string, descending: string): Observable<any> {
+    let asHost = this.db
+      .collection<Match>(DbService.MATCHES_PATH, ref =>
+        ref.where('hostName', '==', playerName).orderBy(orderBy, descending ? 'desc' : 'asc')
+      )
+      .snapshotChanges();
+
+    let asGuest = this.db
+      .collection<Match>(DbService.MATCHES_PATH, ref =>
+        ref.where('guestName', '==', playerName).orderBy(orderBy, descending ? 'desc' : 'asc')
+      )
+      .snapshotChanges();
+
+    return combineLatest(asHost, asGuest).pipe(map(([asHost, asGuest]) => [...asHost, ...asGuest]));
   }
 
   getMatch(matchId: string): Observable<Match> {

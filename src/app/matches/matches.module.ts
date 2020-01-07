@@ -10,6 +10,7 @@ import { ComponentsModule } from '../shared/components.module';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, MatchesPageRoutingModule, ComponentsModule],
-  declarations: [MatchesPage, MatchListComponent, MatchListItemComponent]
+  declarations: [MatchesPage, MatchListComponent, MatchListItemComponent],
+  exports: [MatchListComponent]
 })
 export class MatchesPageModule {}
