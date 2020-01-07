@@ -9,23 +9,40 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./match-list.component.scss']
 })
 export class MatchListComponent implements OnInit {
-  @Input() orderBy: string;
-  @Input() descending: string;
+  @Input() orderBy = 'date';
+  @Input() descending = 'true';
+  @Input() playerName: string;
   matches: Match[];
 
   constructor(private dbService: DbService, public db: AngularFirestore) {}
 
   ngOnInit() {
-    this.dbService.getMatches(this.orderBy, this.descending).subscribe(data => {
-      this.matches = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data(),
-          date: this.formatDate(e.payload.doc.get('date').toDate()),
-          daysAgo: this.calculatePastDays(e.payload.doc.get('date').seconds)
-        } as Match;
+    if (this.playerName) {
+      console.log(this.playerName);
+      this.dbService.getPlayerMatches(this.playerName, this.orderBy, this.descending).subscribe(data => {
+        this.matches = data
+          .map(e => {
+            return {
+              id: e.payload.doc.id,
+              ...e.payload.doc.data(),
+              date: this.formatDate(e.payload.doc.get('date').toDate()),
+              daysAgo: this.calculatePastDays(e.payload.doc.get('date').seconds)
+            } as Match;
+          })
+          .sort((a, b) => a.daysAgo - b.daysAgo);
       });
-    });
+    } else {
+      this.dbService.getMatches(this.orderBy, this.descending).subscribe(data => {
+        this.matches = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data(),
+            date: this.formatDate(e.payload.doc.get('date').toDate()),
+            daysAgo: this.calculatePastDays(e.payload.doc.get('date').seconds)
+          } as Match;
+        });
+      });
+    }
   }
 
   formatDate(date: Date): string {

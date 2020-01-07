@@ -6,7 +6,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">name</ion-label>
-      {{ player.name }}
+      <ng-container *ngIf="player?.name; else blank"
+        >{{ player?.name }}
+        <ion-button fill="clear" color="success" (click)="nameChangeAlert()">
+          <ion-icon name="save" slot="start"></ion-icon>
+          change name
+        </ion-button>
+      </ng-container>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">email</ion-label>
@@ -25,13 +31,9 @@
       {{ player.averageGoalRatio }}
     </ion-item>
   </ion-list>
-</ion-content>
 
-<ion-footer>
-  <ion-toolbar *ngIf="player && userId===playerId" color="success">
-    <ion-button expand="full" fill="clear" color="light" (click)="changeDisplayName()">
-      <ion-icon name="save" slot="start"></ion-icon>
-      change name
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>
+  <ng-container *ngIf="player">
+    <ion-label>last matches</ion-label>
+    <app-match-list [playerName]="player.name"></app-match-list>
+  </ng-container>
+</ion-content>
