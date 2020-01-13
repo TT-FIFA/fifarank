@@ -5,7 +5,6 @@ import { DbService } from 'src/app/services/db.service';
 @Component({
   selector: 'app-player-list',
   templateUrl: './player-list.page.html',
-  styleUrls: ['./player-list.page.scss']
 })
 export class PlayerListPage implements OnInit {
   pageTitle = 'players';
@@ -18,7 +17,7 @@ export class PlayerListPage implements OnInit {
       this.players = data.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data()
+          ...e.payload.doc.data(),
         } as Player;
       });
     });

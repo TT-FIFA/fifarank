@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss']
 })
 export class DashboardPage implements OnInit {
   pageTitle = 'home';
@@ -67,22 +66,22 @@ export class DashboardPage implements OnInit {
           {
             name: 'name',
             type: 'text',
-            value: this.displayName
-          }
+            value: this.displayName,
+          },
         ],
         buttons: [
           {
             text: 'cancel',
-            role: 'cancel'
+            role: 'cancel',
             // tutaj handler gdy cancel
           },
           {
             text: 'create',
             handler: inputs => {
               this.createPlayer(inputs.name);
-            }
-          }
-        ]
+            },
+          },
+        ],
       })
       .then(alert => {
         alert.present();
@@ -93,7 +92,7 @@ export class DashboardPage implements OnInit {
     this.toastCtrl
       .create({
         message: msg,
-        duration: 2000
+        duration: 2000,
       })
       .then(toast => toast.present());
   }

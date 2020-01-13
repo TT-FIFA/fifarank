@@ -6,7 +6,6 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   @Input() pageTitle: string;
@@ -14,7 +13,11 @@ export class HeaderComponent implements OnInit {
   email: string;
   uid: string;
 
-  constructor(public afAuth: AngularFireAuth, private popoverCtrl: PopoverController, private navCtrl: NavController) {}
+  constructor(
+    public afAuth: AngularFireAuth,
+    private popoverCtrl: PopoverController,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
@@ -29,7 +32,7 @@ export class HeaderComponent implements OnInit {
   signIn() {
     this.popoverCtrl
       .create({
-        component: LoginComponent
+        component: LoginComponent,
       })
       .then(popover => {
         popover.present();

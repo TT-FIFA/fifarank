@@ -7,7 +7,13 @@ import { MatchDetailsPage } from './match-details.page';
 import { ComponentsModule } from '../../shared/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, MatchDetailsPageRoutingModule, ComponentsModule],
-  declarations: [MatchDetailsPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MatchDetailsPageRoutingModule,
+    ComponentsModule,
+  ],
+  declarations: [MatchDetailsPage],
 })
 export class MatchDetailsPageModule {}

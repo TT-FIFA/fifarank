@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { Type } from '../match.model';
@@ -10,7 +15,6 @@ import { ClubsPage } from '../../clubs/clubs.page';
 @Component({
   selector: 'app-match-report',
   templateUrl: './match-report.page.html',
-  styleUrls: ['./match-report.page.scss']
 })
 export class MatchReportPage implements OnInit {
   pageTitle = 'match report';
@@ -28,8 +32,11 @@ export class MatchReportPage implements OnInit {
     guestClub: [{ type: 'required', message: 'guest club is required.' }],
     score: [
       { type: 'required', message: 'score is required, even if 0.' },
-      { type: 'maxlength', message: 'score cannot be more than 2 cyphers long.' }
-    ]
+      {
+        type: 'maxlength',
+        message: 'score cannot be more than 2 cyphers long.',
+      },
+    ],
   };
 
   constructor(
@@ -46,7 +53,7 @@ export class MatchReportPage implements OnInit {
       this.players = data.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data()
+          ...e.payload.doc.data(),
         } as Player;
       });
     });
@@ -69,9 +76,9 @@ export class MatchReportPage implements OnInit {
           Validators.required,
           Validators.min(0),
           Validators.maxLength(2),
-          Validators.pattern('[0-9]')
-        ])
-      ]
+          Validators.pattern('[0-9]'),
+        ]),
+      ],
     });
   }
 
@@ -84,7 +91,7 @@ export class MatchReportPage implements OnInit {
       hostClub: new FormControl('', Validators.required),
       guestClub: new FormControl('', Validators.required),
       hostScore: new FormControl('', Validators.required),
-      guestScore: new FormControl('', Validators.required)
+      guestScore: new FormControl('', Validators.required),
     });
   }
 

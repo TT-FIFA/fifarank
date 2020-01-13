@@ -9,8 +9,14 @@ import { MatchListItemComponent } from './match-list/match-list-item/match-list-
 import { ComponentsModule } from '../shared/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, MatchesPageRoutingModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MatchesPageRoutingModule,
+    ComponentsModule,
+  ],
   declarations: [MatchesPage, MatchListComponent, MatchListItemComponent],
-  exports: [MatchListComponent]
+  exports: [MatchListComponent],
 })
 export class MatchesPageModule {}

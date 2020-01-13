@@ -14,8 +14,8 @@ import { MatchesPageModule } from '../../matches/matches.module';
     IonicModule,
     PlayerDetailsPageRoutingModule,
     ComponentsModule,
-    MatchesPageModule
+    MatchesPageModule,
   ],
-  declarations: [PlayerDetailsPage]
+  declarations: [PlayerDetailsPage],
 })
 export class PlayerDetailsPageModule {}

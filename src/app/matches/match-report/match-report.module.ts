@@ -13,8 +13,8 @@ import { ComponentsModule } from '../../shared/components.module';
     ReactiveFormsModule,
     IonicModule,
     MatchReportPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
   ],
-  declarations: [MatchReportPage]
+  declarations: [MatchReportPage],
 })
 export class MatchReportPageModule {}

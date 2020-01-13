@@ -10,11 +10,17 @@ import seriea from '../../assets/clubs/seriea.json';
 @Component({
   selector: 'app-clubs',
   templateUrl: './clubs.page.html',
-  styleUrls: ['./clubs.page.scss']
 })
 export class ClubsPage {
   private pageTitle = 'clubs';
-  private leagues = [bundesliga, ekstraklasa, laliga, ligue1, premierleague, seriea];
+  private leagues = [
+    bundesliga,
+    ekstraklasa,
+    laliga,
+    ligue1,
+    premierleague,
+    seriea,
+  ];
 
   getClubs(): League[] {
     return this.leagues;

@@ -1,5 +1,9 @@
 <ion-content class="ion-padding">
-  <ion-button *ngIf="playerDoesntExists" (click)="createPlayerAlert()" color="success">
+  <ion-button
+    *ngIf="playerDoesntExists"
+    (click)="createPlayerAlert()"
+    color="success"
+  >
     <ion-icon name="person-add" slot="start"></ion-icon>
     join the game, create player!
   </ion-button>

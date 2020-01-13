@@ -7,7 +7,13 @@ import { ClubsPage } from './clubs.page';
 import { ComponentsModule } from '../shared/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ClubsPageRoutingModule, ComponentsModule],
-  declarations: [ClubsPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ClubsPageRoutingModule,
+    ComponentsModule,
+  ],
+  declarations: [ClubsPage],
 })
 export class ClubsPageModule {}

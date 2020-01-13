@@ -7,7 +7,13 @@ import { DashboardPage } from './dashboard.page';
 import { ComponentsModule } from '../shared/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, DashboardPageRoutingModule, ComponentsModule],
-  declarations: [DashboardPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    DashboardPageRoutingModule,
+    ComponentsModule,
+  ],
+  declarations: [DashboardPage],
 })
 export class DashboardPageModule {}

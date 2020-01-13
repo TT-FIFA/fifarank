@@ -7,7 +7,13 @@ import { PlayerListPage } from './player-list.page';
 import { ComponentsModule } from '../../shared/components.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, PlayerListPageRoutingModule, ComponentsModule],
-  declarations: [PlayerListPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    PlayerListPageRoutingModule,
+    ComponentsModule,
+  ],
+  declarations: [PlayerListPage],
 })
 export class PlayerListPageModule {}

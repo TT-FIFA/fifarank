@@ -7,7 +7,6 @@ import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-match-details',
   templateUrl: './match-details.page.html',
-  styleUrls: ['./match-details.page.scss']
 })
 export class MatchDetailsPage implements OnInit {
   pageTitle = 'match summary';
@@ -43,16 +42,16 @@ export class MatchDetailsPage implements OnInit {
         buttons: [
           {
             text: 'leave',
-            role: 'cancel'
+            role: 'cancel',
           },
           {
             text: 'decline',
             handler: () => {
               this.dbService.declineMatch(this.matchId);
               this.router.navigate(['matches']);
-            }
-          }
-        ]
+            },
+          },
+        ],
       })
       .then(alert => {
         alert.present();

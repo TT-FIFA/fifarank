@@ -13,12 +13,12 @@ export interface Match {
 export enum Type {
   FRIENDLY = 'friendly',
   CUP = 'cup',
-  LEAGUE = 'league'
+  LEAGUE = 'league',
 }
 
 export enum Status {
   REPORTED = 'reported',
   CONFIRMED = 'confirmed',
   INCLUDED = 'included',
-  REJECTED = 'rejected'
+  REJECTED = 'rejected',
 }

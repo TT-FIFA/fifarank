@@ -14,12 +14,12 @@ import { FirebaseUIModule } from 'firebaseui-angular';
     RouterModule.forChild([
       {
         path: '',
-        component: HeaderComponent
-      }
-    ])
+        component: HeaderComponent,
+      },
+    ]),
   ],
   entryComponents: [LoginComponent],
   declarations: [HeaderComponent, LoginComponent],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent],
 })
 export class ComponentsModule {}
