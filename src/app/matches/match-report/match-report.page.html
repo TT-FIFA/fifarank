@@ -1,5 +1,3 @@
-<!-- <app-header pageTitle="{{ pageTitle }}"></app-header> -->
-
 <ion-content>
   <form [formGroup]="matchReport" (ngSubmit)="onSubmit(matchReport.value)">
     <ion-grid>
@@ -12,10 +10,9 @@
                 <ion-datetime
                   formControlName="date"
                   type="timestamp"
-                  displayFormat="DDDD D MMM YYYY"
-                  min="2019-01-01"
-                  max="2020-12-31"
-                  required
+                  displayFormat="DDDD, DD MMM YYYY"
+                  [min]="beginningDate"
+                  [max]="today"
                   autofocus
                 >
                 </ion-datetime>
@@ -39,11 +36,8 @@
               <ion-item>
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
-                <ion-select formControlName="type" required interface="popover">
-                  <ion-select-option
-                    *ngFor="let type of types | keyvalue"
-                    value="{{ type.value }}"
-                  >
+                <ion-select formControlName="type" interface="popover">
+                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}">
                     {{ type.value }}
                   </ion-select-option>
                 </ion-select>
@@ -69,25 +63,15 @@
               <ion-label position="stacked">home</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select
-                  formControlName="hostName"
-                  required
-                  interface="popover"
-                >
-                  <ion-select-option
-                    *ngFor="let player of players"
-                    value="{{ player.name }}"
-                    >{{ player.name }}</ion-select-option
-                  >
+                <ion-select formControlName="hostName" interface="popover" (ionChange)="filterPlayers($event)">
+                  <ion-select-option *ngFor="let player of hostPlayers" value="{{ player.name }}">
+                    {{ player.name }}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select
-                  formControlName="hostClub"
-                  required
-                  interface="popover"
-                >
+                <ion-select formControlName="hostClub" interface="popover">
                   <ion-item *ngFor="let league of leagues">
                     <ion-select-option class="leagueName" disabled>
                       {{ league.name }}
@@ -106,8 +90,9 @@
               >
                 <ng-container
                   *ngIf="matchReport.get('hostName').hasError(validation.type) && (matchReport.get('hostName').dirty || matchReport.get('hostName').touched); else elseBlock"
-                  >{{validation.message}}</ng-container
                 >
+                  {{validation.message}}
+                </ng-container>
                 <ng-template #elseBlock>&nbsp;</ng-template>
               </ng-container>
             </ion-card-content>
@@ -126,9 +111,6 @@
                       formControlName="hostScore"
                       type="number"
                       inputmode="numeric"
-                      min="0"
-                      pattern="[0-9]{1,2}"
-                      required
                     ></ion-input>
                   </ion-item>
                 </ion-col>
@@ -141,9 +123,6 @@
                       formControlName="guestScore"
                       type="number"
                       inputmode="numeric"
-                      min="0"
-                      pattern="[0-9]{1,2}"
-                      required
                     ></ion-input>
                   </ion-item>
                 </ion-col>
@@ -153,8 +132,9 @@
               >
                 <ng-container
                   *ngIf="matchReport.get('hostScore').hasError(validation.type) && (matchReport.get('hostScore').dirty || matchReport.get('hostScore').touched) || matchReport.get('guestScore').hasError(validation.type) && (matchReport.get('guestScore').dirty || matchReport.get('guestScore').touched); else elseBlock"
-                  >{{validation.message}}</ng-container
                 >
+                  <div>{{validation.message}}</div>
+                </ng-container>
                 <ng-template #elseBlock>&nbsp;</ng-template>
               </ng-container>
             </ion-card-content>
@@ -174,26 +154,15 @@
               <ion-label position="stacked">away</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select
-                  formControlName="guestName"
-                  required
-                  interface="popover"
-                >
-                  <ion-select-option
-                    *ngFor="let player of players"
-                    value="{{ player.name }}"
-                  >
+                <ion-select formControlName="guestName" interface="popover" (ionChange)="filterPlayers($event)">
+                  <ion-select-option *ngFor="let player of guestPlayers" value="{{ player.name }}">
                     {{ player.name }}
                   </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">club</ion-label>
-                <ion-select
-                  formControlName="guestClub"
-                  required
-                  interface="popover"
-                >
+                <ion-select formControlName="guestClub" interface="popover">
                   <ion-item *ngFor="let league of leagues">
                     <ion-select-option class="leagueName" disabled>
                       {{ league.name }}

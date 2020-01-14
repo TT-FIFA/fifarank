@@ -18,25 +18,26 @@ import { ClubsPage } from '../../clubs/clubs.page';
 })
 export class MatchReportPage implements OnInit {
   pageTitle = 'match report';
+  matchReport: FormGroup;
+  today: string;
+  beginningDate: string;
   types = Type;
   players: Player[];
+  hostPlayers: Player[];
+  guestPlayers: Player[];
   leagues: League[];
-  matchReport: FormGroup;
 
   validation_messages = {
-    date: [{ type: 'required', message: 'date is required.' }],
-    type: [{ type: 'required', message: 'type is required.' }],
-    hostName: [{ type: 'required', message: 'host name is required.' }],
-    guestName: [{ type: 'required', message: 'guest name is required.' }],
-    hostClub: [{ type: 'required', message: 'host club is required.' }],
-    guestClub: [{ type: 'required', message: 'guest club is required.' }],
+    date: [{ type: 'required', message: 'date is required' }],
+    type: [{ type: 'required', message: 'type is required' }],
+    hostName: [{ type: 'required', message: 'host name is required' }],
+    guestName: [{ type: 'required', message: 'guest name is required' }],
+    hostClub: [{ type: 'required', message: 'host club is required' }],
+    guestClub: [{ type: 'required', message: 'guest club is required' }],
     score: [
-      { type: 'required', message: 'score is required, even if 0.' },
-      {
-        type: 'maxlength',
-        message: 'score cannot be more than 2 cyphers long.',
-      },
-    ],
+      { type: 'required', message: 'score is required, even if 0' },
+      { type: 'max', message: 'score cannot be more than 2 cyphers long' }
+    ]
   };
 
   constructor(
@@ -48,17 +49,9 @@ export class MatchReportPage implements OnInit {
 
   ngOnInit() {
     this.createForm();
-
-    this.dbService.getPlayers().subscribe(data => {
-      this.players = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data(),
-        } as Player;
-      });
-    });
-
+    this.getPlayers();
     this.leagues = this.clubService.getClubs();
+    this.setDateLimitValues();
   }
 
   createForm() {
@@ -69,16 +62,50 @@ export class MatchReportPage implements OnInit {
       guestName: ['', Validators.required],
       hostClub: ['', Validators.required],
       guestClub: ['', Validators.required],
-      hostScore: ['', Validators.required],
-      guestScore: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.min(0),
-          Validators.maxLength(2),
-          Validators.pattern('[0-9]'),
-        ]),
-      ],
+      hostScore: ['', Validators.compose([Validators.required, Validators.max(99), Validators.pattern('[0-9]{1,2}')])],
+      guestScore: ['', Validators.compose([Validators.required, Validators.max(99), Validators.pattern('[0-9]{1,2}')])]
+    });
+  }
+
+  getPlayers() {
+    this.dbService.getPlayers().subscribe(data => {
+      this.players = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data(),
+        } as Player;
+      });
+
+      this.copyPlayers();
+    });
+  }
+
+  copyPlayers() {
+    this.hostPlayers = this.players.slice();
+    this.guestPlayers = this.players.slice();
+  }
+
+  setDateLimitValues() {
+    let today = new Date();
+    this.today = today.toISOString();
+    this.beginningDate = new Date(today.setDate(today.getDate() - 30)).toISOString();
+  }
+
+  filterPlayers(event) {
+    let selectedSide = event.target.attributes.formcontrolname.value;
+    let selectedName = event.detail.value;
+    if (selectedSide == 'hostName') {
+      this.guestPlayers = this.players.slice().filter(player => player.name != selectedName);
+    } else if (selectedSide == 'guestName') {
+      this.hostPlayers = this.players.slice().filter(player => player.name != selectedName);
+    }
+  }
+
+  onSubmit(value) {
+    this.dbService.addMatch(value).then(() => {
+      this.resetFields();
+      this.router.navigate(['matches']);
+      // wyświetl powiadomienie o sukcesie
     });
   }
 
@@ -92,14 +119,6 @@ export class MatchReportPage implements OnInit {
       guestClub: new FormControl('', Validators.required),
       hostScore: new FormControl('', Validators.required),
       guestScore: new FormControl('', Validators.required),
-    });
-  }
-
-  onSubmit(value) {
-    this.dbService.addMatch(value).then(() => {
-      this.resetFields();
-      this.router.navigate(['matches']);
-      // wyświetl powiadomienie o sukcesie
     });
   }
 }

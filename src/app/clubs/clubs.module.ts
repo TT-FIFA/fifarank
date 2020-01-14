@@ -4,16 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ClubsPageRoutingModule } from './clubs-routing.module';
 import { ClubsPage } from './clubs.page';
-import { ComponentsModule } from '../shared/components.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ClubsPageRoutingModule,
-    ComponentsModule,
-  ],
-  declarations: [ClubsPage],
+  imports: [CommonModule, FormsModule, IonicModule, ClubsPageRoutingModule],
+  declarations: [ClubsPage]
 })
 export class ClubsPageModule {}
