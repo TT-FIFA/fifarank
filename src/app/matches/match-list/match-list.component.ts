@@ -18,7 +18,6 @@ export class MatchListComponent implements OnInit {
 
   ngOnInit() {
     if (this.playerName) {
-      console.log(this.playerName);
       this.dbService.getPlayerMatches(this.playerName, this.orderBy, this.descending).subscribe(data => {
         this.matches = data
           .map(e => {

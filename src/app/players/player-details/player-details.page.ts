@@ -45,20 +45,14 @@ export class PlayerDetailsPage implements OnInit {
     this.dbService.getPlayer(playerId).subscribe(
       data => {
         if (data.payload.exists) {
-          console.log('data.payload.data(): ', data.payload.data());
           this.player = data.payload.data();
-          console.log('this.player: ', this.player);
           this.playerId = playerId;
         } else {
           this.router.navigate(['./players']);
         }
       },
-      error => {
-        console.log('Error: ', error);
-      },
-      () => {
-        console.log('Completed!');
-      }
+      error => {},
+      () => {}
     );
   }
 
