@@ -24,7 +24,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     AppRoutingModule,
     BrowserModule,

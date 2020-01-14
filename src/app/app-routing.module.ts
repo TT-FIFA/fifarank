@@ -6,30 +6,11 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardPageModule) },
   {
     path: 'players',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./players/player-list/player-list.module').then(m => m.PlayerListPageModule)
-      },
-      {
-        path: ':playerId',
-        loadChildren: () =>
-          import('./players/player-details/player-details.module').then(m => m.PlayerDetailsPageModule)
-      }
-    ]
+    loadChildren: () => import('./players/players.module').then(m => m.PlayersPageModule)
   },
   {
     path: 'matches',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
-      },
-      {
-        path: ':matchId',
-        loadChildren: () => import('./matches/match-details/match-details.module').then(m => m.MatchDetailsPageModule)
-      }
-    ]
+    loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
   },
   {
     path: 'match-report',
@@ -38,6 +19,10 @@ const routes: Routes = [
   {
     path: 'clubs',
     loadChildren: () => import('./clubs/clubs.module').then(m => m.ClubsPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
   }
 ];
 
