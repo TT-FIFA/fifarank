@@ -18,8 +18,11 @@ import { ComponentsModule } from './shared/components.module';
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInSuccessUrl: 'dashboard',
-  signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID, firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-  credentialHelper: firebaseui.auth.CredentialHelper.NONE
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
 };
 
 @NgModule({
@@ -32,15 +35,15 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DbService,
-    ClubsPage
+    ClubsPage,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

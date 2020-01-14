@@ -1,8 +1,10 @@
-<!-- <app-header pageTitle="{{ pageTitle }}"></app-header> -->
-
 <ion-content>
   <ion-list>
-    <ion-item button [routerLink]="['/players', player.id]" *ngFor="let player of players">
+    <ion-item
+      button
+      [routerLink]="['/players', player.id]"
+      *ngFor="let player of players"
+    >
       <ion-badge slot="start">{{ player.points }}</ion-badge> {{ player.name }}
     </ion-item>
   </ion-list>

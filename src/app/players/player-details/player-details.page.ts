@@ -8,7 +8,6 @@ import { DbService } from 'src/app/services/db.service';
 @Component({
   selector: 'app-player-details',
   templateUrl: './player-details.page.html',
-  styleUrls: ['./player-details.page.scss']
 })
 export class PlayerDetailsPage implements OnInit {
   pageTitle = 'player details';
@@ -73,21 +72,21 @@ export class PlayerDetailsPage implements OnInit {
           {
             name: 'name',
             type: 'text',
-            value: this.player.name
-          }
+            value: this.player.name,
+          },
         ],
         buttons: [
           {
             text: 'cancel',
-            role: 'cancel'
+            role: 'cancel',
           },
           {
             text: 'change',
             handler: inputs => {
               this.updatePlayerName(inputs.name);
-            }
-          }
-        ]
+            },
+          },
+        ],
       })
       .then(alert => {
         alert.present();
@@ -109,7 +108,7 @@ export class PlayerDetailsPage implements OnInit {
     this.toastCtrl
       .create({
         message: msg,
-        duration: 2000
+        duration: 2000,
       })
       .then(toast => toast.present());
   }

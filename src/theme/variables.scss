@@ -3,11 +3,19 @@
 
 /** Ionic CSS Variables **/
 .host-win {
-  background: linear-gradient(90deg, rgba(16, 220, 96, 0.8) 0%, rgba(240, 65, 65, 0.8) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 220, 96, 0.8) 0%,
+    rgba(240, 65, 65, 0.8) 100%
+  );
 }
 
 .guest-win {
-  background: linear-gradient(90deg, rgba(16, 220, 96, 0.8) 100%, rgba(240, 65, 65, 0.8) 0%);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 220, 96, 0.8) 100%,
+    rgba(240, 65, 65, 0.8) 0%
+  );
 }
 
 .draw {

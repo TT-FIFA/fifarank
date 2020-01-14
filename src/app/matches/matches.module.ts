@@ -10,6 +10,6 @@ import { MatchListItemComponent } from './match-list/match-list-item/match-list-
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, MatchesPageRoutingModule],
   declarations: [MatchesPage, MatchListComponent, MatchListItemComponent],
-  exports: [MatchListComponent]
+  exports: [MatchListComponent],
 })
 export class MatchesPageModule {}

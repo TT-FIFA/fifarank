@@ -76,13 +76,18 @@
                     <ion-select-option class="leagueName" disabled>
                       {{ league.name }}
                     </ion-select-option>
-                    <ion-select-option *ngFor="let club of league.clubs" value="{{ club.name }}">
+                    <ion-select-option
+                      *ngFor="let club of league.clubs"
+                      value="{{ club.name }}"
+                    >
                       {{ club.name }}
                     </ion-select-option>
                   </ion-item>
                 </ion-select>
               </ion-item>
-              <ng-container *ngFor="let validation of validation_messages.hostName">
+              <ng-container
+                *ngFor="let validation of validation_messages.hostName"
+              >
                 <ng-container
                   *ngIf="matchReport.get('hostName').hasError(validation.type) && (matchReport.get('hostName').dirty || matchReport.get('hostName').touched); else elseBlock"
                 >
@@ -122,7 +127,9 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
-              <ng-container *ngFor="let validation of validation_messages.score">
+              <ng-container
+                *ngFor="let validation of validation_messages.score"
+              >
                 <ng-container
                   *ngIf="matchReport.get('hostScore').hasError(validation.type) && (matchReport.get('hostScore').dirty || matchReport.get('hostScore').touched) || matchReport.get('guestScore').hasError(validation.type) && (matchReport.get('guestScore').dirty || matchReport.get('guestScore').touched); else elseBlock"
                 >
@@ -133,7 +140,15 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col size="10" offset="2" size-sm="9" offset-sm="3" size-md="4" offset-md="0" size-lg="4">
+        <ion-col
+          size="10"
+          offset="2"
+          size-sm="9"
+          offset-sm="3"
+          size-md="4"
+          offset-md="0"
+          size-lg="4"
+        >
           <ion-card>
             <ion-card-content>
               <ion-label position="stacked">away</ion-label>
@@ -152,13 +167,18 @@
                     <ion-select-option class="leagueName" disabled>
                       {{ league.name }}
                     </ion-select-option>
-                    <ion-select-option *ngFor="let club of league.clubs" value="{{ club.name }}">
+                    <ion-select-option
+                      *ngFor="let club of league.clubs"
+                      value="{{ club.name }}"
+                    >
                       {{ club.name }}
                     </ion-select-option>
                   </ion-item>
                 </ion-select>
               </ion-item>
-              <ng-container *ngFor="let validation of validation_messages.guestName">
+              <ng-container
+                *ngFor="let validation of validation_messages.guestName"
+              >
                 <ng-container
                   *ngIf="matchReport.get('guestName').hasError(validation.type) && (matchReport.get('guestName').dirty || matchReport.get('guestName').touched); else elseBlock"
                 >
@@ -180,7 +200,13 @@
             <ion-icon name="close"></ion-icon>
             clear
           </ion-button>
-          <ion-button type="submit" [disabled]="!matchReport.valid" fill="solid" color="primary">report</ion-button>
+          <ion-button
+            type="submit"
+            [disabled]="!matchReport.valid"
+            fill="solid"
+            color="primary"
+            >report</ion-button
+          >
         </ion-buttons>
       </ion-row>
     </ion-grid>

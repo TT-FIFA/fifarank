@@ -6,8 +6,8 @@ import { MatchDetailsPage } from './match-details.page';
 const routes: Routes = [
   {
     path: '',
-    component: MatchDetailsPage
-  }
+    component: MatchDetailsPage,
+  },
 ];
 
 @NgModule({

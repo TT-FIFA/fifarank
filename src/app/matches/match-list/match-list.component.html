@@ -16,14 +16,21 @@
       status
     </ion-col>
   </ion-list-header>
-  <app-match-list-item *ngFor="let match of matches" [matchListItem]="match"></app-match-list-item>
+  <app-match-list-item
+    *ngFor="let match of matches"
+    [matchListItem]="match"
+  ></app-match-list-item>
 
   <!-- skeleton text start -->
   <ng-container *ngIf="!matches">
     <ion-item *ngFor="let iteration of [1, 2, 3]">
       <ion-grid>
-        <ion-chip style="width: 10em"><ion-skeleton-text animated></ion-skeleton-text></ion-chip>
-        <ion-chip style="width: 5em"><ion-skeleton-text animated></ion-skeleton-text></ion-chip>
+        <ion-chip style="width: 10em"
+          ><ion-skeleton-text animated></ion-skeleton-text
+        ></ion-chip>
+        <ion-chip style="width: 5em"
+          ><ion-skeleton-text animated></ion-skeleton-text
+        ></ion-chip>
         <ion-row>
           <ion-col size="2">
             <ion-skeleton-text animated></ion-skeleton-text>
@@ -34,7 +41,10 @@
                 <ion-skeleton-text animated></ion-skeleton-text>
               </ion-card-header>
               <ion-card-content>
-                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                <ion-skeleton-text
+                  animated
+                  style="width: 30%"
+                ></ion-skeleton-text>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -47,7 +57,10 @@
                 <ion-skeleton-text animated></ion-skeleton-text>
               </ion-card-header>
               <ion-card-content>
-                <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+                <ion-skeleton-text
+                  animated
+                  style="width: 70%"
+                ></ion-skeleton-text>
               </ion-card-content>
             </ion-card>
           </ion-col>

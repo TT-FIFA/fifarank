@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Match, Status } from '../matches/match.model';
 import { Player } from '../players/player.model';
-import { Club } from '../clubs/club.model';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,24 +14,36 @@ export class DbService {
 
   getMatches(orderBy: string, descending: string): Observable<any> {
     return this.db
-      .collection<Match>(DbService.MATCHES_PATH, ref => ref.orderBy(orderBy, descending ? 'desc' : 'asc'))
+      .collection<Match>(DbService.MATCHES_PATH, ref =>
+        ref.orderBy(orderBy, descending ? 'desc' : 'asc')
+      )
       .snapshotChanges();
   }
 
-  getPlayerMatches(playerName: string, orderBy: string, descending: string): Observable<any> {
+  getPlayerMatches(
+    playerName: string,
+    orderBy: string,
+    descending: string
+  ): Observable<any> {
     let asHost = this.db
       .collection<Match>(DbService.MATCHES_PATH, ref =>
-        ref.where('hostName', '==', playerName).orderBy(orderBy, descending ? 'desc' : 'asc')
+        ref
+          .where('hostName', '==', playerName)
+          .orderBy(orderBy, descending ? 'desc' : 'asc')
       )
       .snapshotChanges();
 
     let asGuest = this.db
       .collection<Match>(DbService.MATCHES_PATH, ref =>
-        ref.where('guestName', '==', playerName).orderBy(orderBy, descending ? 'desc' : 'asc')
+        ref
+          .where('guestName', '==', playerName)
+          .orderBy(orderBy, descending ? 'desc' : 'asc')
       )
       .snapshotChanges();
 
-    return combineLatest(asHost, asGuest).pipe(map(([asHost, asGuest]) => [...asHost, ...asGuest]));
+    return combineLatest(asHost, asGuest).pipe(
+      map(([asHost, asGuest]) => [...asHost, ...asGuest])
+    );
   }
 
   getMatch(matchId: string): Observable<Match> {
@@ -52,7 +63,7 @@ export class DbService {
       guestClub: value.guestClub,
       hostScore: value.hostScore,
       guestScore: value.guestScore,
-      status: Status.REPORTED
+      status: Status.REPORTED,
     });
   }
 
@@ -64,7 +75,9 @@ export class DbService {
 
   getPlayers(): Observable<any> {
     return this.db
-      .collection<Player>(DbService.PLAYERS_PATH, ref => ref.orderBy('points', 'desc'))
+      .collection<Player>(DbService.PLAYERS_PATH, ref =>
+        ref.orderBy('points', 'desc')
+      )
       .snapshotChanges();
   }
 
@@ -85,7 +98,7 @@ export class DbService {
           email: email,
           points: 0,
           matches: 0,
-          averageGoalRatio: 0
+          averageGoalRatio: 0,
         },
         { merge: true }
       )
@@ -102,7 +115,7 @@ export class DbService {
       .collection<Player>(DbService.PLAYERS_PATH)
       .doc<Player>(id)
       .update({
-        name: newName
+        name: newName,
       })
       .then(docRef => {
         console.log('Document updated');

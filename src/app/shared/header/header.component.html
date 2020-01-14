@@ -6,7 +6,10 @@
       </ion-button>
     </ion-buttons>
     <ion-title>{{ pageTitle }}</ion-title>
-    <ion-buttons *ngIf="afAuth.auth.currentUser; else signInButton" slot="primary">
+    <ion-buttons
+      *ngIf="afAuth.auth.currentUser; else signInButton"
+      slot="primary"
+    >
       <ion-button *ngIf="displayName" [routerLink]="['/players', uid]">
         {{ displayName }}
         <ion-icon slot="start" name="contact"></ion-icon>
