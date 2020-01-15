@@ -7,7 +7,13 @@ import { PlayerDetailsPage } from './player-details.page';
 import { MatchesPageModule } from '../../matches/matches.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, PlayerDetailsPageRoutingModule, MatchesPageModule],
-  declarations: [PlayerDetailsPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    PlayerDetailsPageRoutingModule,
+    MatchesPageModule,
+  ],
+  declarations: [PlayerDetailsPage],
 })
 export class PlayerDetailsPageModule {}

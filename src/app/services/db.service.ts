@@ -12,7 +12,7 @@ export class DbService {
 
   constructor(public db: AngularFirestore) {}
 
-  getMatches(orderBy: string, descending: string): Observable<any> {
+  getMatches(orderBy: string, descending?: string): Observable<any> {
     return this.db
       .collection<Match>(DbService.MATCHES_PATH, ref =>
         ref.orderBy(orderBy, descending ? 'desc' : 'asc')
@@ -23,7 +23,7 @@ export class DbService {
   getPlayerMatches(
     playerName: string,
     orderBy: string,
-    descending: string
+    descending?: string
   ): Observable<any> {
     let asHost = this.db
       .collection<Match>(DbService.MATCHES_PATH, ref =>
@@ -73,10 +73,10 @@ export class DbService {
 
   declineMatch(matchId: string) {}
 
-  getPlayers(): Observable<any> {
+  getPlayers(orderBy: string, descending?: string): Observable<any> {
     return this.db
       .collection<Player>(DbService.PLAYERS_PATH, ref =>
-        ref.orderBy('points', 'desc')
+        ref.orderBy(orderBy, descending ? 'desc' : 'asc')
       )
       .snapshotChanges();
   }

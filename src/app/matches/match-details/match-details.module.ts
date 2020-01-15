@@ -6,7 +6,12 @@ import { MatchDetailsPageRoutingModule } from './match-details-routing.module';
 import { MatchDetailsPage } from './match-details.page';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, MatchDetailsPageRoutingModule],
-  declarations: [MatchDetailsPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MatchDetailsPageRoutingModule,
+  ],
+  declarations: [MatchDetailsPage],
 })
 export class MatchDetailsPageModule {}
