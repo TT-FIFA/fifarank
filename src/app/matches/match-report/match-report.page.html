@@ -37,7 +37,10 @@
                 <!-- jak wyniesiesz ten label o poziom wyżej to się zjebie -->
                 <ion-label position="stacked">type</ion-label>
                 <ion-select formControlName="type" interface="popover">
-                  <ion-select-option *ngFor="let type of types | keyvalue" value="{{ type.value }}">
+                  <ion-select-option
+                    *ngFor="let type of types | keyvalue"
+                    value="{{ type.value }}"
+                  >
                     {{ type.value }}
                   </ion-select-option>
                 </ion-select>
@@ -63,8 +66,15 @@
               <ion-label position="stacked">home</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="hostName" interface="popover" (ionChange)="filterPlayers($event)">
-                  <ion-select-option *ngFor="let player of hostPlayers" value="{{ player.name }}">
+                <ion-select
+                  formControlName="hostName"
+                  interface="popover"
+                  (ionChange)="filterPlayers($event)"
+                >
+                  <ion-select-option
+                    *ngFor="let player of hostPlayers"
+                    value="{{ player.name }}"
+                  >
                     {{ player.name }}
                   </ion-select-option>
                 </ion-select>
@@ -154,8 +164,15 @@
               <ion-label position="stacked">away</ion-label>
               <ion-item>
                 <ion-label position="stacked">name</ion-label>
-                <ion-select formControlName="guestName" interface="popover" (ionChange)="filterPlayers($event)">
-                  <ion-select-option *ngFor="let player of guestPlayers" value="{{ player.name }}">
+                <ion-select
+                  formControlName="guestName"
+                  interface="popover"
+                  (ionChange)="filterPlayers($event)"
+                >
+                  <ion-select-option
+                    *ngFor="let player of guestPlayers"
+                    value="{{ player.name }}"
+                  >
                     {{ player.name }}
                   </ion-select-option>
                 </ion-select>

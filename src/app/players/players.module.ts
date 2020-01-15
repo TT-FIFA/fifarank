@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PlayersPageRoutingModule } from './players-routing.module';
 import { PlayersPage } from './players.page';
-import { PlayerListPage } from './player-list/player-list.page';
+import { PlayerListComponent } from './player-list/player-list.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, PlayersPageRoutingModule],
-  declarations: [PlayersPage, PlayerListPage]
+  declarations: [PlayersPage, PlayerListComponent],
+  exports: [PlayerListComponent],
 })
 export class PlayersPageModule {}

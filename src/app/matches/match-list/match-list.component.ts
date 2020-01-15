@@ -1,24 +1,30 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Match } from '../match.model';
 import { DbService } from '../../services/db.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Criteria } from './sorting-criteria';
 
 @Component({
   selector: 'app-match-list',
   templateUrl: './match-list.component.html',
 })
 export class MatchListComponent implements OnInit {
-  @Input() orderBy = 'date';
-  @Input() descending = 'true';
+  @Input() orderBy;
+  defaultSortingCriteria = Criteria.DATE;
+  @Input() descending;
   @Input() playerName: string;
   matches: Match[];
 
-  constructor(private dbService: DbService, public db: AngularFirestore) {}
+  constructor(private dbService: DbService) {}
 
   ngOnInit() {
+    let sortingCriteria = Criteria[this.orderBy.toUpperCase()];
+    if (sortingCriteria == null) {
+      sortingCriteria = this.defaultSortingCriteria;
+    }
+
     if (this.playerName) {
       this.dbService
-        .getPlayerMatches(this.playerName, this.orderBy, this.descending)
+        .getPlayerMatches(this.playerName, sortingCriteria, this.descending)
         .subscribe(data => {
           this.matches = data
             .map(e => {
@@ -35,7 +41,7 @@ export class MatchListComponent implements OnInit {
         });
     } else {
       this.dbService
-        .getMatches(this.orderBy, this.descending)
+        .getMatches(sortingCriteria, this.descending)
         .subscribe(data => {
           this.matches = data.map(e => {
             return {

@@ -5,16 +5,19 @@ import { MatchesPage } from './matches.page';
 const routes: Routes = [
   {
     path: '',
-    component: MatchesPage
+    component: MatchesPage,
   },
   {
     path: ':matchId',
-    loadChildren: () => import('./match-details/match-details.module').then(m => m.MatchDetailsPageModule)
-  }
+    loadChildren: () =>
+      import('./match-details/match-details.module').then(
+        m => m.MatchDetailsPageModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MatchesPageRoutingModule {}
