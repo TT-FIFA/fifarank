@@ -1,27 +1,3 @@
 <ion-content>
-  <ion-label>slajdy</ion-label>
-  <ion-slides scrollbar="true">
-    <ion-slide *ngFor="let league of leagues">
-      <ion-list>
-        <ion-label>{{ league.name }}</ion-label>
-        <ion-item *ngFor="let club of league.clubs">
-          {{ club.name }}
-        </ion-item>
-      </ion-list>
-    </ion-slide>
-  </ion-slides>
-
-  <ion-label>grid</ion-label>
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let league of leagues">
-        <ion-label>{{ league.name }}</ion-label>
-        <ion-list>
-          <ion-item *ngFor="let club of league.clubs">
-            {{ club.name }}
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-club-list></app-club-list>
 </ion-content>
