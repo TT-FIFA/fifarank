@@ -7,7 +7,6 @@ import { DbService } from '../../services/db.service';
   templateUrl: './player-list.page.html',
 })
 export class PlayerListPage implements OnInit {
-  pageTitle = 'players';
   players: Player[];
 
   constructor(private dbService: DbService) {}
