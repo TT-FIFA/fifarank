@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PlayerListPage } from './player-list/player-list.page';
+import { PlayersPage } from './players.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PlayerListPage
+    component: PlayersPage,
   },
   {
     path: ':playerId',
-    loadChildren: () => import('./player-details/player-details.module').then(m => m.PlayerDetailsPageModule)
-  }
+    loadChildren: () =>
+      import('./player-details/player-details.module').then(
+        m => m.PlayerDetailsPageModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PlayersPageRoutingModule {}

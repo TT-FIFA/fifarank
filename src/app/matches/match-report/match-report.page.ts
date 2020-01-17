@@ -10,7 +10,7 @@ import { DbService } from '../../services/db.service';
 import { Type } from '../match.model';
 import { Player } from '../../players/player.model';
 import { League } from '../../clubs/league.model';
-import { ClubsPage } from '../../clubs/clubs.page';
+import { ClubListComponent } from '../../clubs/club-list/club-list.component';
 
 @Component({
   selector: 'app-match-report',
@@ -36,12 +36,12 @@ export class MatchReportPage implements OnInit {
     guestClub: [{ type: 'required', message: 'guest club is required' }],
     score: [
       { type: 'required', message: 'score is required, even if 0' },
-      { type: 'max', message: 'score cannot be more than 2 cyphers long' }
-    ]
+      { type: 'max', message: 'score cannot be more than 2 cyphers long' },
+    ],
   };
 
   constructor(
-    private clubService: ClubsPage,
+    private clubService: ClubListComponent,
     private dbService: DbService,
     private fb: FormBuilder,
     private router: Router
@@ -62,8 +62,22 @@ export class MatchReportPage implements OnInit {
       guestName: ['', Validators.required],
       hostClub: ['', Validators.required],
       guestClub: ['', Validators.required],
-      hostScore: ['', Validators.compose([Validators.required, Validators.max(99), Validators.pattern('[0-9]{1,2}')])],
-      guestScore: ['', Validators.compose([Validators.required, Validators.max(99), Validators.pattern('[0-9]{1,2}')])]
+      hostScore: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.max(99),
+          Validators.pattern('[0-9]{1,2}'),
+        ]),
+      ],
+      guestScore: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.max(99),
+          Validators.pattern('[0-9]{1,2}'),
+        ]),
+      ],
     });
   }
 
@@ -88,16 +102,22 @@ export class MatchReportPage implements OnInit {
   setDateLimitValues() {
     let today = new Date();
     this.today = today.toISOString();
-    this.beginningDate = new Date(today.setDate(today.getDate() - 30)).toISOString();
+    this.beginningDate = new Date(
+      today.setDate(today.getDate() - 30)
+    ).toISOString();
   }
 
   filterPlayers(event) {
     let selectedSide = event.target.attributes.formcontrolname.value;
     let selectedName = event.detail.value;
     if (selectedSide == 'hostName') {
-      this.guestPlayers = this.players.slice().filter(player => player.name != selectedName);
+      this.guestPlayers = this.players
+        .slice()
+        .filter(player => player.name != selectedName);
     } else if (selectedSide == 'guestName') {
-      this.hostPlayers = this.players.slice().filter(player => player.name != selectedName);
+      this.hostPlayers = this.players
+        .slice()
+        .filter(player => player.name != selectedName);
     }
   }
 

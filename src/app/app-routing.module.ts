@@ -11,12 +11,12 @@ const routes: Routes = [
   {
     path: 'players',
     loadChildren: () =>
-      import('./players/players.module').then(m => m.PlayersPageModule)
+      import('./players/players.module').then(m => m.PlayersPageModule),
   },
   {
     path: 'matches',
     loadChildren: () =>
-      import('./matches/matches.module').then(m => m.MatchesPageModule)
+      import('./matches/matches.module').then(m => m.MatchesPageModule),
   },
   {
     path: 'match-report',
@@ -33,8 +33,10 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () =>
-      import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
-  }
+      import('./page-not-found/page-not-found.module').then(
+        m => m.PageNotFoundPageModule
+      ),
+  },
 ];
 
 @NgModule({

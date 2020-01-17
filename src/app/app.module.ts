@@ -12,7 +12,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DbService } from './services/db.service';
-import { ClubsPage } from './clubs/clubs.page';
+import { ClubListComponent } from './clubs/club-list/club-list.component';
 import { ComponentsModule } from './shared/components.module';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -42,7 +42,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DbService,
-    ClubsPage,
+    ClubListComponent,
   ],
   bootstrap: [AppComponent],
 })
