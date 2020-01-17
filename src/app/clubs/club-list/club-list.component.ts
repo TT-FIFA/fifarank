@@ -12,7 +12,7 @@ import seriea from '../../../assets/clubs/seriea.json';
   templateUrl: './club-list.component.html',
 })
 export class ClubListComponent implements OnInit {
-  private leagues = [
+  private leagues: League[] = [
     bundesliga,
     ekstraklasa,
     laliga,

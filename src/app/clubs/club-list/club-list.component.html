@@ -3,7 +3,11 @@
   <ion-slide *ngFor="let league of leagues">
     <ion-list>
       <ion-label>{{ league.name }}</ion-label>
-      <ion-item *ngFor="let club of league.clubs">
+      <ion-item
+        button
+        [routerLink]="['/clubs', league.name, club.id]"
+        *ngFor="let club of league.clubs"
+      >
         {{ club.name }}
       </ion-item>
     </ion-list>
@@ -16,7 +20,11 @@
     <ion-col *ngFor="let league of leagues">
       <ion-label>{{ league.name }}</ion-label>
       <ion-list>
-        <ion-item *ngFor="let club of league.clubs">
+        <ion-item
+          button
+          [routerLink]="['/clubs', league.name, club.id]"
+          *ngFor="let club of league.clubs"
+        >
           {{ club.name }}
         </ion-item>
       </ion-list>
